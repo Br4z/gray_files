@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 polybar-msg cmd quit
 
 echo "---" | tee -a /tmp/bar.log

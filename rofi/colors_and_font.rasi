@@ -2,9 +2,7 @@
 	font: "CaskaydiaCove Nerd Font Mono 10";
 
 	background:     #262626;
-	background-alt: #262626;
-	foreground:     #BCBCBC; // Purple
-	urgent:         #87875F; // Dark Purple
+	foreground:     #BCBCBC;
 
 	black:   #1C1C1C;
 	red:     #AF5F5F;

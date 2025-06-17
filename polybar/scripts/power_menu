@@ -6,11 +6,11 @@
 #   \/_/    \/_____/ \/_/   \/_/ \/_____/ \/_/ /_/     \/_/  \/_/ \/_____/ \/_/ \/_/ \/_____/
 
 
-# CMDs
-uptime="`uptime -p | sed -e 's/up //g'`"
-host=`cat /etc/hostname`
+uptime="$(uptime -p | sed -e \"s/up //g\")"
+host=$(cat /etc/hostname)
 
-# Options
+# ---------------------------------- OPTIONS --------------------------------- #
+
 shutdown='󰐥'
 reboot='󰜉'
 lock=''
@@ -37,17 +37,15 @@ function confirm_cmd {
 		-theme power_menu.rasi
 }
 
-# Ask for confirmation
+
 function confirm_exit {
 	echo -e "$yes\n$no" | confirm_cmd
 }
 
-# Pass variables to rofi dmenu
 function run_rofi {
 	echo -e "$lock\n$logout\n$reboot\n$shutdown" | rofi_cmd
 }
 
-# Execute Command
 function run_cmd {
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
@@ -63,15 +61,14 @@ function run_cmd {
 	fi
 }
 
-# Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-	$shutdown)
+	"$shutdown")
 		run_cmd --shutdown;;
-	$reboot)
+	"$reboot")
 		run_cmd --reboot;;
-	$lock)
+	"$lock")
 		i3lock;;
-	$logout)
+	"$logout")
 		run_cmd --logout;;
 esac
