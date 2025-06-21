@@ -5,13 +5,16 @@
 #  \ \_____\  \ \_\ \ \_\\ \_____\\ \_\  \ \_\ \ \_\\ \_____\\/\_____\
 #   \/_____/   \/_/  \/_/ \/_____/ \/_/   \/_/  \/_/ \/_____/ \/_____/
 
+
+source "$HOME/.local/bin/colors_and_helpers"
+
 # ---------------------------------------------------------------------------- #
 #                                    ALIASES                                   #
 # ---------------------------------------------------------------------------- #
 
 # ------------------------------------ CAT ----------------------------------- #
 
-if which bat &>/dev/null; then
+if command_exists bat; then
 	alias cat='bat'
 	alias catn='bat --style=plain'
 	alias catnp='bat --style=plain --paging=never'
@@ -19,7 +22,7 @@ fi
 
 # ------------------------------------ LS ------------------------------------ #
 
-if which lsd &>/dev/null; then
+if command_exists lsd; then
 	alias ll='lsd -lh --group-dirs=first'
 	alias la='lsd -a --group-dirs=first'
 	alias l='lsd --group-dirs=first'
@@ -47,80 +50,6 @@ function mkcd {
 	cd "$1" || exit 1
 }
 
-function run_c {
-	echo "Compiling..."
-
-	if [[ $1 == 0 ]]; then
-		if [[ -f "$2" ]]; then
-			g++ "$2" -o main
-
-			shift 2
-		else
-			echo "Error: source file not found"
-			return 1
-		fi
-	else
-		source_files=$(find . -name "*.cpp")
-
-		if [[ -z "$source_files" ]]; then
-			echo "Error: no .cpp files found"
-			return 1
-		fi
-
-		g++ $source_files -o main
-
-		shift 1
-	fi
-
-	echo "Executing..."
-
-	if [ -f "./main" ]; then
-		./main "$@"
-		rm ./main
-	else
-		return 1
-	fi
-}
-
-run_java() {
-	echo "Compiling..."
-
-	if [ "$1" -eq 0 ]; then
-		if [ -f "$2" ]; then
-			shift 1
-			if javac "$1"; then
-				echo "Executing..."
-				java Main "$@"
-			else
-				return 1
-			fi
-
-		else
-			echo "Error: source file not found"
-			exit 1
-		fi
-	elif [ "$1" -eq 1 ]; then
-		if [ -f "src/Main.java" ]; then
-			if javac -d out src/Main.java; then
-				shift 2
-
-				if [ -d "src/assets" ] && ! cp -rf src/assets out; then
-					echo "Error: something went wrong while copying the assets"
-				else
-					echo "Executing..."
-					java -cp out src.Main "$@"
-
-					# Remove compiled files
-					# rm -r out
-				fi
-			fi
-		else
-			echo "Error: src/Main.java file not found"
-			return 1
-		fi
-	fi
-}
-
 # ex - archive extractor
 # usage: ex <file>
 function ex {
@@ -143,15 +72,3 @@ function ex {
 		echo "'$1' is not a valid file"
 	fi
 }
-
-if which polybar &>/dev/null; then
-	function set_target {
-		ip_address=$1
-		machine_name=$2
-		echo "$ip_address $machine_name" > "$HOME/.config/polybar/scripts/target_content"
-	}
-
-	function clear_target {
-		echo "" > "$HOME/.config/polybar/scripts/target_content"
-}
-fi

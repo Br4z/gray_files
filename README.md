@@ -4,17 +4,17 @@
 
 	- [GTK](https://thispersondoesnotexist.com).
 
-		> Through the application lxapparence and I save my themes in `$HOME/.themes`.
+		> Through the application lxapparence and I save my themes in `~/.themes`.
 
 	- [Cursor](https://thispersondoesnotexist.com).
 
-		> I save my cursors in `$HOME/.local/share/icons`.
+		> I save my cursors in `~/.local/share/icons`.
 
 	- [Icons](https://thispersondoesnotexist.com).
 
 	- [QT5](https://thispersondoesnotexist.com).
 
-		> Through the application qt5ct.
+		> Through `qt5ct`.
 
 	- [GRUB](https://thispersondoesnotexist.com).
 
@@ -22,76 +22,50 @@
 
 - Fonts.
 
-	- Programming.
+	- Programming: [CaskaydiaMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases).
 
-		- [Caskaydia Cove Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases).
+	- Japanese: [Noto CJK](https://github.com/notofonts/noto-cjk/releases).
 
-			> There is a package available in Arch (`otf-cascadia-code-nerd`), but I prefer to install it myself.
+	- Symbols: [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji).
 
-	- Symbols.
-
-		- [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji).
-
-			> The black-and-white version.
-
-	> I save my fonts in `$HOME/.local/share/fonts` and use the command `fc-cache` to scan the new fonts.
+		> The black-and-white version.
 
 - Text editor.
 
-	- Terminal: [Neovim](https://github.com/neovim/neovim).
+	- Terminal: [Neovim](./nvim).
 
-		> [Files](./nvim)
+	- GUI: Mousepad.
 
-	- GUI: [Mousepad](https://github.com/codebrainz/mousepad).
-
-- IDE: [Visual Studio Code](https://github.com/microsoft/vscode).
+- IDE: Visual Studio Code.
 
 	- [Theme](https://marketplace.visualstudio.com/items?itemName=arzg.apprentice).
 
-- File manager: [Thunar](https://gitlab.xfce.org/xfce/thunar).
+- File manager: Thunar.
 
-	> In some specific things I use [ranger](https://github.com/ranger/ranger).
+- Audio manager: pavucontrol.
 
-- Audio manager: [pavucontrol](https://gitlab.freedesktop.org/pulseaudio/pavucontrol).
+- Display manager: ly.
 
-	> [ncpamixer](https://github.com/fulhax/ncpamixer) for terminal.
+- Terminal: [kitty](./kitty).
 
-- Display manager: [ly](https://github.com/fairyglade/ly).
-
-- Terminal: [kitty](https://github.com/kovidgoyal/kitty).
-
-	> [Files](./kitty)
-
-	- Shell: [Bash](https://git.savannah.gnu.org/cgit/bash.git/).
-
-		> [Files](./bash)
+	- Shell: [Bash](./bash).
 
 	- [Theme](./kitty/colors.conf).
 
-- Application launcher: [rofi](https://github.com/davatorium/rofi).
+- Application launcher: [rofi](./rofi).
 
-	> [Files](./rofi)
+- Wallpapers: nitrogen.
 
-- Wallpapers: [nitrogen](https://github.com/l3ib/nitrogen).
+- Compositor: [picom](./picom).
 
-- Compositor: [picom](https://github.com/yshui/picom).
+- Video player: mpv.
 
-	> [Files](./picom)
-
-- Video player: [mpv](https://github.com/mpv-player/mpv).
-
-- Image player: [nsxiv](https://codeberg.org/nsxiv/nsxiv).
+- Image player: nsxiv.
 
 - Music player:
 
-- Documents viewer: [Zathura](https://git.pwmt.org/pwmt/zathura).
-
-	> With `zathura-pdf-mupdf` to open PDF, EPUB and XPS files.
+- Documents viewer: Zathura.
 
 - Bootloader: GRUB.
 
-- Credits.
-
-	- [gh0stzk](https://github.com/gh0stzk/dotfiles).
-
-		> The scripts comes from his dotfiles repository.
+> Credits to [gh0stzk](https://github.com/gh0stzk/dotfiles).

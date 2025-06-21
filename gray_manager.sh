@@ -1,56 +1,28 @@
 #!/bin/bash
+#  ______   ______   ______   __  __       __    __   ______   __   __   ______   ______   ______   ______
+# /\  ___\ /\  == \ /\  __ \ /\ \_\ \     /\ "-./  \ /\  __ \ /\ "-.\ \ /\  __ \ /\  ___\ /\  ___\ /\  == \
+# \ \ \__ \\ \  __< \ \  __ \\ \____ \    \ \ \-./\ \\ \  __ \\ \ \-.  \\ \  __ \\ \ \__ \\ \  __\ \ \  __<
+#  \ \_____\\ \_\ \_\\ \_\ \_\\/\_____\    \ \_\ \ \_\\ \_\ \_\\ \_\\"\_\\ \_\ \_\\ \_____\\ \_____\\ \_\ \_\
+#   \/_____/ \/_/ /_/ \/_/\/_/ \/_____/     \/_/  \/_/ \/_/\/_/ \/_/ \/_/ \/_/\/_/ \/_____/ \/_____/ \/_/ /_/
 
 
-green_color="\e[0;32m"
-end_color="\e[0m"
-red_color="\e[0;31m"
-blue_color="\e[0;34m"
-yellow_color="\e[0;33m"
-purple_color="\e[0;35m"
-cyan_color="\e[0;36m"
-gray_color="\e[0;37m"
+source "$HOME/.local/bin/colors_and_helpers"
+set -euo pipefail
 
 # Description: handle the Ctrl+C signal and exit the program.
 # Parameters: none.
-function ctrl_c() {
-	echo -e "${red_color}[-]${end_color}Exiting...\n"
-	tput cnorm
-	exit 1
-}
-
-trap ctrl_c INT
-
-# ---------------------------------------------------------------------------- #
-
-# Description: displays the help panel with usage instructions for the script.
-# Parameters: none.
-function help_panel() {
-	echo -e "${green_color}[+]${end_color} Usage:\n"
-
-	for ((i=0; i<${#files[@]}; i++)); do
-		echo -e "${green_color}$i${end_color}) File: ${files[i]} Target: ${target_paths[i]}"
-	done
-
-	echo -e "$\t${purple_color}-i${end_color} <number of a application> <number of a application>*"
-	echo -e "$\t${purple_color}-h${end_color} display this panel\n"
-}
-
-# Description: validates if the given option is a number.
-# Parameters: none.
-function validate_option() {
-	option=$1
-	if [[ ! $option =~ ^[0-9]+$ ]]; then
-		echo -e "${red_color}[-]${end_color} Error: invalid option"
-		exit 1
+function cleanup() {
+	# Restore cursor only for interactive runs
+	if [[ -t 1 ]]; then
+		tput cnorm || true
 	fi
 }
 
-dotfiles_path="$(dirname -- "${BASH_SOURCE[0]}")"
-dotfiles_path="$(cd -- "$dotfiles_path" && pwd)"
+trap cleanup EXIT
 
-if [[ ! "$dotfiles_path" ]] ; then
-	exit 1
-fi
+# --------------------------- DEFAULT AND CONSTANTS -------------------------- #
+
+dotfiles_path="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 declare -r files=(
 	"bspwm"
@@ -101,25 +73,80 @@ declare -r link_paths=(
 	".config/xfce4/xfconf/xfce-perchannel-xml"
 )
 
+# Ensure metadata integrity
+if [[ ${#files[@]} -ne ${#target_paths[@]} || ${#files[@]} -ne ${#link_paths[@]} ]]; then
+	error "array length mismatch\n"
+	exit 1
+fi
+
+# ------------------------------- USAGE BANNER ------------------------------- #
+
+# Description: displays the help panel with usage instructions for the script.
+# Parameters: none.
+function usage() {
+	info "Usage:\n"
+	local idx
+	for idx in "${!files[@]}"; do
+		echo -e "${green_color}$i${end_color}) File: ${files[i]} Target: ${target_paths[i]}"
+	done
+
+	echo -e "$\t${magenta_color}-i${end_color} index [index ...]"
+	echo -e "$\t${magenta_color}-h${end_color} show this help panel\n"
+}
+
+# Description: validates if the given index is a valid index.
+# Parameters: none.
+function validate_index() {
+	local idx=$1
+	if [[ ! $option =~ ^[0-9]+$ ]]; then
+		error "${idx} is a invalid index" >&2
+		exit 1
+	fi
+
+	if (( idx >= ${#files[@]} )); then
+		error "${idx} index is out of range" >&2
+		exit 1
+	fi
+}
+
 # Description: applies dotfiles by creating symbolic links from target paths to link paths.
 # Parameters:
 # 	- $@: The indices of the dotfiles to apply.
 function apply_dotfiles() {
-	for file_index in "$@"; do
-		validate_option $file_index
-		echo -e "${blue_color}${target_paths[$file_index]}${end_color} -> ${blue_color}$HOME/${link_paths[$file_index]}${end_color}"
-		ln -fs "${target_paths[$file_index]}" "$HOME/${link_paths[$file_index]}"
+	local idx source dest
+	for idx in "$@"; do
+		validate_index "$idx$"
+		source="${target_paths[$idx]}"
+		dest="$HOME/${link_paths[$idx]}"
+		# Create destination parent directory if it does not exist
+		mkdir -p "$(dirname -- "$dest")"
+		echo -e "${blue_color}$source${end_color} -> ${blue_color}$dest${end_color}"
+		ln -fs "$source" "$dest"
 	done
 }
 
-# ---------------------------------------------------------------------------- #
+# ----------------------------- PARSE CLI OPTIONS ---------------------------- #
 
-while getopts "i" arg; do
-	case $arg in
-		i)
-			shift 1
-			apply_dotfiles "$@"
+if [[ $# -eq 0 ]]; then
+	usage
+	exit 0
+fi
+
+while getopts ":hi" opt; do
+	case $opt in
+		h)
+			usage
+			exit 0
 			;;
-		*) help_panel;;
+		i) ;;
+		\?)
+			error "$OPTARG is a unknown option"
+			usage
+			exit 1
+			;;
 	esac
 done
+shift $((OPTIND - 1))
+
+# If -i was given, remaining arguments are indices
+apply_dotfiles "$@"
