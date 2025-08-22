@@ -1,0 +1,7 @@
+[2m2024-12-20T20:33:50.550575Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m gaps.outer_gap: invalid type: string "5 px", expected struct RectDelta at line 50 column 14
+[2m2024-12-20T20:34:20.524987Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m found unknown escape character at line 145 column 44, while parsing a quoted scalar at line 145 column 32
+[2m2024-12-20T20:34:43.425115Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m found unknown escape character at line 145 column 44, while parsing a quoted scalar at line 145 column 32
+[2m2024-12-27T21:05:07.362903Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m did not find expected '-' indicator at line 152 column 4, while parsing a block collection at line 130 column 3
+[2m2024-12-27T21:06:39.612466Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m did not find expected '-' indicator at line 151 column 4, while parsing a block collection at line 130 column 3
+[2m2025-03-22T00:50:30.185746Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Invalid window handle. (0x80070578)
+[2m2025-03-22T00:50:32.834559Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Invalid window handle. (0x80070578)

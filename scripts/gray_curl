@@ -6,8 +6,8 @@
 #   \/_____/ \/_/ /_/ \/_/\/_/ \/_____/     \/_____/ \/_____/ \/_/ /_/ \/_____/
 
 
-source "$HOME/.local/bin/colors_and_helpers"
-set -euo pipefail
+source "$HOME/.local/bin/colors_and_helpers" || { error "colors and helpers file not found"; exit 1; }
+set -uo pipefail
 IFS=$'\n\t'
 
 # ------------------------------- USAGE BANNER ------------------------------- #
@@ -61,7 +61,7 @@ while true; do
 		-q|--quiet)   quiet=true; shift;;
 		-v|--verbose) verbose=true; shift;;
 		-h|--help)    usage; exit 0;;
-		--) shift; break;;
+		--)           shift; break;;
 		*) error "unknown option: $1"; usage; exit 1;;
 	esac
 done
