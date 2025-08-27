@@ -6,7 +6,15 @@
 #   \/_____/ \/_/ /_/ \/_/\/_/ \/_____/     \/_/  \/_/ \/_/\/_/ \/_/ \/_/ \/_/\/_/ \/_____/ \/_____/ \/_/ /_/
 
 
+dotfiles_path="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+if [[ ! -f "$HOME/.local/bin/colors_and_helpers" ]]; then
+	echo "here"
+	mkdir -p "$HOME/.local/bin/"
+	ln -fs "$dotfiles_path/scripts/colors_and_helpers" "$HOME/.local/bin/"
+fi
 source "$HOME/.local/bin/colors_and_helpers"
+
 set -euo pipefail
 
 # Description: handle the Ctrl+C signal and exit the program.
@@ -21,8 +29,6 @@ function cleanup() {
 trap cleanup EXIT
 
 # --------------------------- DEFAULT AND CONSTANTS -------------------------- #
-
-dotfiles_path="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 declare -r files=(
 	"bspwm"
@@ -87,24 +93,24 @@ function usage() {
 	info "Usage:\n"
 	local idx
 	for idx in "${!files[@]}"; do
-		echo -e "${green_color}$i${end_color}) File: ${files[i]} Target: ${target_paths[i]}"
+		echo -e "${GREEN}$idx${RESET}) File: ${files[idx]} Target: ${target_paths[idx]}"
 	done
 
-	echo -e "$\t${magenta_color}-i${end_color} index [index ...]"
-	echo -e "$\t${magenta_color}-h${end_color} show this help panel\n"
+	echo -e "$\t${MAGENTA}-i${RESET} index [index ...]"
+	echo -e "$\t${MAGENTA}-h${RESET} show this help panel\n"
 }
 
 # Description: validates if the given index is a valid index.
 # Parameters: none.
 function validate_index() {
 	local idx=$1
-	if [[ ! $option =~ ^[0-9]+$ ]]; then
-		error "${idx} is a invalid index" >&2
+	if [[ ! $idx =~ ^[0-9]+$ ]]; then
+		error "${idx} is a invalid index"
 		exit 1
 	fi
 
 	if (( idx >= ${#files[@]} )); then
-		error "${idx} index is out of range" >&2
+		error "${idx} index is out of range"
 		exit 1
 	fi
 }
@@ -115,12 +121,12 @@ function validate_index() {
 function apply_dotfiles() {
 	local idx source dest
 	for idx in "$@"; do
-		validate_index "$idx$"
+		validate_index "$idx"
 		source="${target_paths[$idx]}"
 		dest="$HOME/${link_paths[$idx]}"
 		# Create destination parent directory if it does not exist
 		mkdir -p "$(dirname -- "$dest")"
-		echo -e "${blue_color}$source${end_color} -> ${blue_color}$dest${end_color}"
+		echo -e "${BLUE}$source${RESET} -> ${BLUE}$dest${RESET}"
 		ln -fs "$source" "$dest"
 	done
 }

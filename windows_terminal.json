@@ -271,17 +271,17 @@
         {
             "command": "togglePaneZoom",
             "id": "User.togglePaneZoom"
+        },
+        {
+            "command": "markMode",
+            "id": "User.markMode"
         }
     ],
     "copyFormatting": "none",
-    "copyOnSelect": false,
-    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+    "copyOnSelect": true,
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "keybindings": 
     [
-        {
-            "id": "User.resizePane.2A0DA8E0",
-            "keys": "ctrl+left"
-        },
         {
             "id": "User.commandPalette.D3F0B923",
             "keys": "f1"
@@ -295,15 +295,11 @@
             "keys": "ctrl+shift+enter"
         },
         {
-            "id": "User.swapPane.2A0DA8E0",
-            "keys": "ctrl+shift+h"
+            "id": null,
+            "keys": "ctrl+shift+tab"
         },
         {
-            "id": "User.copy.644BA8F2",
-            "keys": "ctrl+c"
-        },
-        {
-            "id": "User.swapPane.F747588A",
+            "id": "User.resizePane.6CD791B",
             "keys": "ctrl+shift+k"
         },
         {
@@ -311,16 +307,16 @@
             "keys": "ctrl+shift+d"
         },
         {
-            "id": "User.closeTab.0",
-            "keys": "ctrl+shift+w"
+            "id": null,
+            "keys": "alt+shift+up"
         },
         {
             "id": "User.splitPane.A6751878",
             "keys": "ctrl+enter"
         },
         {
-            "id": null,
-            "keys": "alt+shift+up"
+            "id": "User.closeTab.0",
+            "keys": "ctrl+shift+w"
         },
         {
             "id": null,
@@ -335,12 +331,12 @@
             "keys": "alt+shift+d"
         },
         {
-            "id": null,
-            "keys": "alt+enter"
+            "id": "User.resizePane.2A0DA8E0",
+            "keys": "ctrl+alt+h"
         },
         {
             "id": null,
-            "keys": "ctrl+shift+p"
+            "keys": "alt+enter"
         },
         {
             "id": null,
@@ -351,20 +347,16 @@
             "keys": "ctrl+shift+6"
         },
         {
+            "id": "Terminal.NextTab",
+            "keys": "ctrl+shift+l"
+        },
+        {
             "id": "User.switchToTab.87C324ED",
             "keys": "ctrl+3"
         },
         {
-            "id": "User.swapPane.87C324ED",
-            "keys": "ctrl+shift+l"
-        },
-        {
             "id": null,
             "keys": "ctrl+shift+9"
-        },
-        {
-            "id": "User.resizePane.87C324ED",
-            "keys": "ctrl+right"
         },
         {
             "id": null,
@@ -427,12 +419,20 @@
             "keys": "ctrl+shift+t"
         },
         {
+            "id": "User.resizePane.87C324ED",
+            "keys": "ctrl+alt+l"
+        },
+        {
             "id": null,
             "keys": "alt+down"
         },
         {
             "id": null,
             "keys": "alt+left"
+        },
+        {
+            "id": "User.find",
+            "keys": "ctrl+f"
         },
         {
             "id": null,
@@ -495,8 +495,20 @@
             "keys": "ctrl+shift+comma"
         },
         {
+            "id": "User.swapPane.2A0DA8E0",
+            "keys": "alt+h"
+        },
+        {
+            "id": "Terminal.OpenNewTabProfile1",
+            "keys": "ctrl+shift+2"
+        },
+        {
             "id": null,
             "keys": "ctrl+shift+5"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+period"
         },
         {
             "id": null,
@@ -516,15 +528,11 @@
         },
         {
             "id": null,
-            "keys": "alt+shift+down"
-        },
-        {
-            "id": "User.resizePane.6CD791B",
-            "keys": "ctrl+up"
+            "keys": "ctrl+tab"
         },
         {
             "id": null,
-            "keys": "ctrl+alt+1"
+            "keys": "alt+shift+down"
         },
         {
             "id": null,
@@ -532,15 +540,19 @@
         },
         {
             "id": null,
-            "keys": "ctrl+alt+left"
+            "keys": "ctrl+alt+1"
         },
         {
-            "id": "User.moveFocus.6CD791B",
-            "keys": "ctrl+k"
+            "id": null,
+            "keys": "ctrl+alt+left"
         },
         {
             "id": null,
             "keys": "win+sc(41)"
+        },
+        {
+            "id": "User.moveFocus.6CD791B",
+            "keys": "ctrl+k"
         },
         {
             "id": null,
@@ -549,14 +561,6 @@
         {
             "id": "User.togglePaneZoom",
             "keys": "ctrl+shift+z"
-        },
-        {
-            "id": "User.paste",
-            "keys": "ctrl+v"
-        },
-        {
-            "id": "User.find",
-            "keys": "ctrl+shift+f"
         },
         {
             "id": null,
@@ -579,16 +583,8 @@
             "keys": "f9"
         },
         {
-            "id": "User.resizePane.F747588A",
-            "keys": "ctrl+down"
-        },
-        {
             "id": "User.closePane",
             "keys": "ctrl+w"
-        },
-        {
-            "id": "User.swapPane.6CD791B",
-            "keys": "ctrl+shift+j"
         },
         {
             "id": "User.scrollUpPage",
@@ -613,6 +609,50 @@
         {
             "id": "User.resetFontSize",
             "keys": "ctrl+numpad_multiply"
+        },
+        {
+            "id": "User.swapPane.F747588A",
+            "keys": "alt+j"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+a"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+m"
+        },
+        {
+            "id": null,
+            "keys": "alt+f4"
+        },
+        {
+            "id": "User.swapPane.6CD791B",
+            "keys": "alt+k"
+        },
+        {
+            "id": "Terminal.OpenNewTabProfile0",
+            "keys": "ctrl+shift+1"
+        },
+        {
+            "id": "Terminal.OpenNewTabProfile2",
+            "keys": "ctrl+shift+3"
+        },
+        {
+            "id": "User.resizePane.F747588A",
+            "keys": "ctrl+alt+j"
+        },
+        {
+            "id": "Terminal.PrevTab",
+            "keys": "ctrl+shift+h"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+p"
+        },
+        {
+            "id": "User.swapPane.87C324ED",
+            "keys": "alt+l"
         }
     ],
     "newTabMenu": 
@@ -630,61 +670,38 @@
         "list": 
         [
             {
-                "colorScheme": "Apprentice",
-                "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe --NoLogo",
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"  --nologo",
                 "font": 
                 {
-                    "face": "CaskaydiaCove Nerd Font",
+                    "face": "CaskaydiaCove Nerd Font Mono",
                     "size": 14
                 },
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
-                "icon": "D:\\Pictures\\Icons\\PowerShell.ico",
                 "name": "PowerShell",
-                "opacity": 95
+                "source": "Windows.Terminal.PowershellCore"
             },
             {
-                "colorScheme": "Apprentice",
+                "font": 
+                {
+                    "face": "CaskaydiaCove Nerd Font Mono",
+                    "size": 14
+                },
+                "guid": "{94a7198a-f7bb-5bc4-8c42-c4f8e5372dd7}",
+                "hidden": false,
+                "name": "Arch",
+                "source": "Microsoft.WSL"
+            },
+            {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "font": 
                 {
-                    "face": "CaskaydiaCove Nerd Font",
+                    "face": "CaskaydiaCove Nerd Font Mono",
                     "size": 14
                 },
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
-                "icon": "D:\\Pictures\\Icons\\CMD.png",
-                "name": "Command Prompt",
-                "opacity": 95
-            },
-            {
-                "colorScheme": "Apprentice",
-                "commandline": "C:\\Windows\\system32\\wsl.exe -d Arch /usr/bin/bash",
-                "font": 
-                {
-                    "face": "CaskaydiaCove Nerd Font",
-                    "size": 14
-                },
-                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
-                "hidden": false,
-                "icon": "D:\\Pictures\\Icons\\Arch.ico",
-                "name": "Arch",
-                "opacity": 95,
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "colorScheme": "Apprentice",
-                "commandline": "C:\\Program Files\\Git\\bin\\bash.exe",
-                "font": 
-                {
-                    "face": "CaskaydiaCove Nerd Font",
-                    "size": 14
-                },
-                "guid": "{6743e984-c7d1-4f46-846c-a6f8813a8f45}",
-                "hidden": false,
-                "icon": "D:\\pictures\\icons\\Git.png",
-                "name": "Git Bash",
-                "opacity": 95
+                "name": "Command prompt"
             }
         ]
     },
@@ -712,29 +729,6 @@
             "selectionBackground": "#FFFFFF",
             "white": "#6C6C6C",
             "yellow": "#87875F"
-        },
-        {
-            "background": "#F2EEDE",
-            "black": "#000000",
-            "blue": "#1E6FCC",
-            "brightBlack": "#767676",
-            "brightBlue": "#1E6FCC",
-            "brightCyan": "#158C86",
-            "brightGreen": "#216609",
-            "brightPurple": "#5C21A5",
-            "brightRed": "#CC3E28",
-            "brightWhite": "#AAAAAA",
-            "brightYellow": "#B58900",
-            "cursorColor": "#000000",
-            "cyan": "#158C86",
-            "foreground": "#000000",
-            "green": "#216609",
-            "name": "Paperr",
-            "purple": "#5C21A5",
-            "red": "#CC3E28",
-            "selectionBackground": "#000000",
-            "white": "#AAAAAA",
-            "yellow": "#B58900"
         }
     ],
     "themes": []

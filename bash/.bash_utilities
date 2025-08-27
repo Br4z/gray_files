@@ -32,14 +32,13 @@ fi
 
 # ----------------------------------- OTHER ---------------------------------- #
 
-alias cp='cp -i'     # Confirm before overwriting something
-alias df='df -h'     # Human-readable sizes
+alias cp='cp -i' # Confirm before overwriting something
+alias df='df -h' # Human-readable sizes
 alias dirty-cache='watch -t -n 1 "cat /proc/meminfo | grep Dirty"'
 alias free='free -m' # Show sizes in MB
 alias icat='kitty +kitten icat'
 alias kubectl="minikube kubectl --"
 alias nvimcf='cd ~/.config/nvim'
-alias programming='cd /mnt/g/Programming'
 
 # ---------------------------------------------------------------------------- #
 #                                   FUNCTIONS                                  #
@@ -53,7 +52,7 @@ function mkcd {
 # ex - archive extractor
 # usage: ex <file>
 function ex {
-	if [ -f $1 ] ; then
+	if [[ -f $1 ]] ; then
 		case $1 in
 			*.tar.bz2) tar xjf $1   ;;
 			*.tar.gz)  tar xzf $1   ;;
