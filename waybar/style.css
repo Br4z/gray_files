@@ -1,0 +1,85 @@
+@import "colors.css";
+
+/* ------------------------------- BASE STYLES ------------------------------ */
+
+* {
+	border: none;
+	border-radius: 0;
+	font-family: "JetBrainsMono Nerd Font", monospace;
+	font-size: 14px;
+	min-height: 0;
+}
+
+window#waybar {
+	background: @background;
+	color: @foreground;
+}
+
+tooltip {
+	background: @background;
+	border: 1px solid @light_white;
+}
+
+tooltip label {
+	color: @light_white;
+}
+
+/* ------------------------------- WORKSPACES ------------------------------- */
+
+#workspaces {
+	background-color: transparent;
+	margin: 0;
+}
+
+#workspaces button {
+	padding: 0 10px;
+	background-color: transparent;
+	color: @foreground;
+	border-bottom: 3px solid transparent;
+}
+
+/* Focused: underline light_white */
+#workspaces button.active {
+	color: @light_white;
+	border-bottom: 3px solid @light_white;
+}
+
+/* Occupied: underline white */
+#workspaces button.visible {
+	color: @white;
+	border-bottom: 3px solid @white;
+}
+
+/* Urgent: underline red */
+#workspaces button.urgent {
+	color: @red;
+	border-bottom: 3px solid @red;
+}
+
+/* --------------------------------- MODULES -------------------------------- */
+
+/* Common style for modules using 'light_black' background */
+#cpu,
+#memory,
+#temperature,
+#network,
+#clock {
+	background-color: @light_black;
+	color: @foreground;
+	padding: 0 10px;
+	margin: 4px 2px;
+}
+
+/* Specific Tweaks */
+#temperature.critical {
+	color: @red;
+}
+
+#network.disconnected {
+	color: @red;
+}
+
+#window {
+	color: @white;
+	padding: 0 10px;
+}

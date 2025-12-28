@@ -36,16 +36,6 @@ keymap('n', '<S-l>', ':bnext<CR>', opts)
 keymap('n', '<S-h>', ':bprevious<CR>', opts)
 keymap("n", "<LEADER>c", ":bw<CR>", opts)
 
--- --------------------------------- INSERT --------------------------------- --
-
--- Press jj "fast" to exit insert mode (change to normal mode)
-keymap('i', 'jj', '<ESC>', opts)
-
--- -------------------------------- TERMINAL -------------------------------- --
-
--- Exit insert mode
-keymap('t', 'jj', '<C-\\><C-n>', opts)
-
 -- --------------------------------- VISUAL --------------------------------- --
 
 -- Stay in indent mode

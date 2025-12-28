@@ -1,71 +1,67 @@
-# Grayfiles
+# Gray files
 
-- Themes.
+## System and core
 
-	- [GTK](https://thispersondoesnotexist.com).
+- Bootloader: `system-boot`.
 
-		> Through the application lxapparence and I save my themes in `~/.themes`.
+- Display manager: `ly`.
 
-	- [Cursor](https://thispersondoesnotexist.com).
+- Screen lock manager: `hyprlock`.
 
-		> I save my cursors in `~/.local/share/icons`.
+- Shell: [`bash`](./bash).
 
-	- [Icons](https://thispersondoesnotexist.com).
+## Desktop environment
 
-	- [QT5](https://thispersondoesnotexist.com).
+- Bar: `waybar`.
 
-		> Through `qt5ct`.
+- Application launcher: `wofi`.
 
-	- [GRUB](https://thispersondoesnotexist.com).
+- Notifications manager: `mako`.
 
-- Font manager: [Font Manager](https://github.com/FontManager/font-manager).
+- Wallpapers: `hyprpaper`.
+
+## Theming and appearance
+
+- GTK Manager: `nwg-look`.
+
+- QT Manager: `qt5ct`/`qt6ct`
+
+- [Cursor theme](https://thispersondoesnotexist.com).
+
+- [Icons](https://thispersondoesnotexist.com).
+
+- Font manager: `font-manager`.
 
 - Fonts.
 
-	- Programming: [CaskaydiaMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases).
+	- Programming: `ttf-cascadia-mono-nerd`.
 
-	- Japanese: [Noto CJK](https://github.com/notofonts/noto-cjk/releases).
+	- Japanese: `noto-fonts-cjk`.
 
-	- Symbols: [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji).
+	- Symbols: `noto-fonts-emoji` and `otf-font-awesome`.
 
-		> The black-and-white version.
+## Productivity
+
+- Terminal: [`kitty`](./kitty).
 
 - Text editor.
 
-	- Terminal: [Neovim](./nvim).
+	- Terminal: [`neovim`](./nvim).
 
-	- GUI: Mousepad.
+	- GUI: `mousepad`.
 
-- IDE: Visual Studio Code.
+- IDE: `visual-studio-code-bin`.
 
-	- [Theme](https://marketplace.visualstudio.com/items?itemName=arzg.apprentice).
+- File manager: `thunar`.
 
-- File manager: Thunar.
+- Documents viewer: `zathura`.
 
-- Audio manager: pavucontrol.
+## Media
 
-- Display manager: ly.
+- Audio manager: `pwvucontrol`.
 
-- Terminal: [kitty](./kitty).
+- Video player: `mpv`.
 
-	- Shell: [Bash](./bash).
+- Image viewer: `nsxiv`.
 
-	- [Theme](./kitty/colors.conf).
-
-- Application launcher: [rofi](./rofi).
-
-- Wallpapers: nitrogen.
-
-- Compositor: [picom](./picom).
-
-- Video player: mpv.
-
-- Image player: nsxiv.
-
-- Music player:
-
-- Documents viewer: Zathura.
-
-- Bootloader: GRUB.
-
-> Credits to [gh0stzk](https://github.com/gh0stzk/dotfiles).
+- Music player:.

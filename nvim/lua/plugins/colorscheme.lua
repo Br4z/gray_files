@@ -1,17 +1,12 @@
 return {
 	{
 		"romainl/Apprentice",
+		lazy = false, -- Make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- Make sure to load this before all the other start plugins
 		config = function()
 			vim.cmd.colorscheme "apprentice"
 
-			local function has_truecolor()
-				if vim.fn.has("termguicolors") == 1 then
-					return true
-				end
-				return false
-			end
-
-			if has_truecolor() then
+			if vim.fn.has("termguicolors") == 1 then
 				vim.opt.termguicolors = true
 			end
 		end

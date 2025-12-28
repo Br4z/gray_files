@@ -35,9 +35,9 @@ fi
 # Optimized git branch parsing with error handling
 parse_git_branch() {
 	local branch
-	if branch=$(git symbolic-ref --short HEAD 2>/dev/null); then
+	if branch=$(git symbolic-ref --short HEAD 2>/dev/null); then # Try regular branch first
 		echo "$branch"
-	elif branch=$(git describe --exact-match HEAD 2>/dev/null); then
+	elif branch=$(git describe --exact-match HEAD 2>/dev/null); then # Try any tag/description for detached HEAD
 		echo "$branch"
 	fi
 }
@@ -56,9 +56,9 @@ _set_kali_prompt() {
 
 	local status_indicator=""
 	if [[ $exit_code -eq 0 ]]; then
-		status_indicator="${GREEN}✓"
+		status_indicator="✅"
 	else
-		status_indicator="${RED}✗"
+		status_indicator="❌"
 	fi
 
 	# First line: user, host, and path
@@ -66,14 +66,14 @@ _set_kali_prompt() {
 	local prompt_line_2=""
 
 	if [[ $EUID -eq 0 ]]; then # Check if user is root
-		# Root prompt: ┌--(root☠hostname)
+		# Root prompt: +--(root☠hostname)
 		prompt_line_1="${BLUE}+--(${RED}root☠\h${BLUE})"
-		prompt_line_1+="-[${WHITE}\w${BLUE}]"
+		prompt_line_1+="-[${WHITE}📂 \w${BLUE}]"
 		prompt_line_2="${BLUE}\\-${RED}# ${RESET}"
 	else
-		# Normal user prompt: ┌--(user㉿hostname)
+		# Normal user prompt: +--(user㉿hostname)
 		prompt_line_1="${GREEN}+--(${BLUE}\u㉿\h${GREEN})"
-		prompt_line_1+="-[${WHITE}\w${GREEN}]"
+		prompt_line_1+="-[${WHITE}📂 \w${GREEN}]"
 		prompt_line_2="${GREEN}\\-${BLUE}$ ${RESET}"
 	fi
 
@@ -81,17 +81,28 @@ _set_kali_prompt() {
 	local git_branch
 	git_branch="$(parse_git_branch)"
 	if [[ -n "$git_branch" ]]; then
+		prompt_line_1+="-[${WHITE}🌱 $git_branch"
 		if [[ $EUID -eq 0 ]]; then
-			prompt_line_1+="-[${WHITE}$git_branch${BLUE}]"
+			prompt_line_1+="${BLUE}]"
 		else
-			prompt_line_1+="-[${WHITE}$git_branch${GREEN}]"
+			prompt_line_1+="${GREEN}]"
 		fi
 	fi
 
+	if [[ -n "$VIRTUAL_ENV_PROMPT" ]]; then
+		prompt_line_1+="-[${WHITE}🐍 $VIRTUAL_ENV_PROMPT"
+		if [[ $EUID -eq 0 ]]; then
+			prompt_line_1+="${BLUE}]"
+		else
+			prompt_line_1+="${GREEN}]"
+		fi
+	fi
+
+	prompt_line_1+="-[${status_indicator}"
 	if [[ $EUID -eq 0 ]]; then
-		prompt_line_1+="-[${status_indicator}${BLUE}]"
+		prompt_line_1+="${BLUE}]"
 	else
-		prompt_line_1+="-[${status_indicator}${GREEN}]"
+		prompt_line_1+="${GREEN}]"
 	fi
 
 	# Set the final prompt
@@ -100,3 +111,7 @@ _set_kali_prompt() {
 
 # This tells Bash to run our function every time before showing the prompt
 PROMPT_COMMAND="_set_kali_prompt"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

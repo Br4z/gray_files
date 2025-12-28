@@ -31,52 +31,42 @@ trap cleanup EXIT
 # --------------------------- DEFAULT AND CONSTANTS -------------------------- #
 
 declare -r files=(
-	"bspwm"
+	"hyprland"
+	"waybar"
 	"firefox"
 	"bin"
-	"sxhkd"
 	"kitty"
 	"bashrc"
 	"bash_utilities"
 	"bash_profile"
 	"nvim"
-	"polybar"
 	"qt5ct"
-	"rofi"
-	"xcfe4"
 )
 
 declare -r target_paths=(
-	"$dotfiles_path/bspwm"
-	"$dotfiles_path/firefox"
-	"$dotfiles_path/scripts"
-	"$dotfiles_path/sxhkd"
-	"$dotfiles_path/kitty"
+	"$dotfiles_path/hyprland/"
+	"$dotfiles_path/waybar/"
+	"$dotfiles_path/firefox/"
+	"$dotfiles_path/scripts/"
+	"$dotfiles_path/kitty/"
 	"$dotfiles_path/bash/.bashrc"
 	"$dotfiles_path/bash/.bash_utilities"
 	"$dotfiles_path/bash/.bash_profile"
-	"$dotfiles_path/nvim"
-	"$dotfiles_path/polybar"
+	"$dotfiles_path/nvim/"
 	"$dotfiles_path/qt5ct/everything_i_see_is_gray.conf"
-	"$dotfiles_path/rofi"
-	"$dotfiles_path/xfce4"
-
 )
 
 declare -r link_paths=(
-	".config/bspwm"
+	".config/hypr/"
+	".config/waybar/"
 	".mozilla/firefox"
-	".local/bin"
-	".config/sxhkd"
+	".local/bin/"
 	".config/"
 	""
 	""
 	""
-	".config/nvim"
-	".config/polybar"
+	".config/nvim/"
 	".config/qt5ct/colors"
-	".config/rofi"
-	".config/xfce4/xfconf/xfce-perchannel-xml"
 )
 
 # Ensure metadata integrity
