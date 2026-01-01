@@ -5,7 +5,6 @@
 #  \ \_____\\ \_\ \_\\ \_\ \_\\/\_____\    \ \_\ \ \_\\ \_\ \_\\ \_\\"\_\\ \_\ \_\\ \_____\\ \_____\\ \_\ \_\
 #   \/_____/ \/_/ /_/ \/_/\/_/ \/_____/     \/_/  \/_/ \/_/\/_/ \/_/ \/_/ \/_/\/_/ \/_____/ \/_____/ \/_/ /_/
 
-
 dotfiles_path="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 if [[ ! -f "$HOME/.local/bin/colors_and_helpers" ]]; then
@@ -31,42 +30,54 @@ trap cleanup EXIT
 # --------------------------- DEFAULT AND CONSTANTS -------------------------- #
 
 declare -r files=(
-	"hyprland"
-	"waybar"
-	"firefox"
-	"bin"
-	"kitty"
+	"hyprland/"
+	"waybar/"
+	"firefox/"
+	"bin/"
+	"kitty/"
 	"bashrc"
 	"bash_utilities"
 	"bash_profile"
-	"nvim"
-	"qt5ct"
+	"nvim/"
+	"qt5ct/"
+	"mpd/"
+	"rmpc/"
+	"swappy/"
+	"mako/"
 )
 
 declare -r target_paths=(
-	"$dotfiles_path/hyprland/"
-	"$dotfiles_path/waybar/"
-	"$dotfiles_path/firefox/"
-	"$dotfiles_path/scripts/"
-	"$dotfiles_path/kitty/"
-	"$dotfiles_path/bash/.bashrc"
-	"$dotfiles_path/bash/.bash_utilities"
-	"$dotfiles_path/bash/.bash_profile"
-	"$dotfiles_path/nvim/"
-	"$dotfiles_path/qt5ct/everything_i_see_is_gray.conf"
+	"hyprland"
+	"waybar"
+	"firefox"
+	"scripts"
+	"kitty"
+	"bash/.bashrc"
+	"bash/.bash_utilities"
+	"bash/.bash_profile"
+	"nvim"
+	"qt5ct/everything_i_see_is_gray.conf"
+	"mpd"
+	"rmpc"
+	"swappy"
+	"mako"
 )
 
 declare -r link_paths=(
-	".config/hypr/"
-	".config/waybar/"
+	".config/hypr"
+	".config/waybar"
 	".mozilla/firefox"
-	".local/bin/"
-	".config/"
+	".local/bin"
+	".config/kitty"
 	""
 	""
 	""
-	".config/nvim/"
+	".config/nvim"
 	".config/qt5ct/colors"
+	".config/mpd"
+	".config/rmpc"
+	".config/swappy"
+	".config/mako"
 )
 
 # Ensure metadata integrity
@@ -112,7 +123,7 @@ function apply_dotfiles() {
 	local idx source dest
 	for idx in "$@"; do
 		validate_index "$idx"
-		source="${target_paths[$idx]}"
+		source="${dotfiles_path}/${target_paths[$idx]}"
 		dest="$HOME/${link_paths[$idx]}"
 		# Create destination parent directory if it does not exist
 		mkdir -p "$(dirname -- "$dest")"

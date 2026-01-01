@@ -5,7 +5,7 @@
 * {
 	border: none;
 	border-radius: 0;
-	font-family: "JetBrainsMono Nerd Font", monospace;
+	font-family: "CaskaydiaMono Nerd Font Mono", monospace;
 	font-size: 14px;
 	min-height: 0;
 }
@@ -38,19 +38,19 @@ tooltip label {
 	border-bottom: 3px solid transparent;
 }
 
-/* Focused: underline light_white */
+#workspaces button.empty {
+	color: @white;
+}
+
 #workspaces button.active {
 	color: @light_white;
 	border-bottom: 3px solid @light_white;
 }
 
-/* Occupied: underline white */
 #workspaces button.visible {
-	color: @white;
 	border-bottom: 3px solid @white;
 }
 
-/* Urgent: underline red */
 #workspaces button.urgent {
 	color: @red;
 	border-bottom: 3px solid @red;
@@ -58,10 +58,11 @@ tooltip label {
 
 /* --------------------------------- MODULES -------------------------------- */
 
-/* Common style for modules using 'light_black' background */
+#mpd,
+#wireplumber,
 #cpu,
-#memory,
 #temperature,
+#memory,
 #network,
 #clock {
 	background-color: @light_black;
@@ -70,7 +71,6 @@ tooltip label {
 	margin: 4px 2px;
 }
 
-/* Specific Tweaks */
 #temperature.critical {
 	color: @red;
 }
