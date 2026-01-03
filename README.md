@@ -8,13 +8,15 @@
 
 - Screen lock manager: `hyprlock`.
 
+- Idle manager: `hypridle`.
+
 - Shell: [`bash`](./bash).
 
 ## Desktop environment
 
 - Bar: `waybar`.
 
-- Application launcher: `wofi`.
+- Application launcher: `hyprlauncher`.
 
 - Notifications manager: `mako`.
 
@@ -64,4 +66,4 @@
 
 - Image viewer: `nsxiv`.
 
-- Music player:.
+- Music player: `rmpc`.
