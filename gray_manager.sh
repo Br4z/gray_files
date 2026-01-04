@@ -44,6 +44,7 @@ declare -r files=(
 	"rmpc/"
 	"swappy/"
 	"mako/"
+	"zathura/"
 )
 
 declare -r target_paths=(
@@ -61,6 +62,7 @@ declare -r target_paths=(
 	"rmpc"
 	"swappy"
 	"mako"
+	"zathura"
 )
 
 declare -r link_paths=(
@@ -78,6 +80,7 @@ declare -r link_paths=(
 	".config/rmpc"
 	".config/swappy"
 	".config/mako"
+	".config/zathura"
 )
 
 # Ensure metadata integrity

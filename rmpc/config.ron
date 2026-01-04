@@ -4,10 +4,6 @@
 (
 	address: "127.0.0.1:6600",
 	password: None,
-	album_art: (
-		method: Kitty,
-		max_size_px: (400, 400),
-	),
 	theme: None,
 	cache_dir: None,
 	on_song_change: None,
@@ -26,7 +22,7 @@
 	browser_song_sort: [Disc, Track, Artist, Title],
 	directories_sort: SortFormat(group_by_type: true, reverse: false),
 	album_art: (
-		method: Auto,
+		method: Kitty,
 		max_size_px: (width: 1200, height: 1200),
 		disabled_protocols: ["http://", "https://"],
 		vertical_align: Center,

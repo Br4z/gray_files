@@ -5,11 +5,6 @@
 #  \ \_\   \ \_\ \_\\ \_____\\ \_\   \ \_\\ \_____\\ \_____\
 #   \/_/    \/_/ /_/ \/_____/ \/_/    \/_/ \/_____/ \/_____/
 
-
-if [[ -d "/mnt/c/Users/brandon/AppData/Local/Programs/oh-my-posh/themes/" ]]; then
-	export POSH_THEMES_PATH="/mnt/c/Users/brandon/AppData/Local/Programs/oh-my-posh/themes/"
-fi
-
 if [[ -f "$HOME/.bashrc" ]]; then
 	source "$HOME/.bashrc"
 fi
@@ -29,5 +24,3 @@ fi
 if [[ -d "$HOME/.local/bin" ]]; then
 	export PATH="$HOME/.local/bin":"$PATH"
 fi
-
-export _JAVA_AWT_WM_NONREPARENTING=1
