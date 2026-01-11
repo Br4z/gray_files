@@ -2,31 +2,33 @@
 
 ## System and core
 
-- Bootloader: `system-boot`.
+- Bootloader: `systemd-boot`.
 
 - Display manager: `ly`.
 
-- Screen lock manager: `hyprlock`.
+- Screen lock manager: [`hyprlock`](./hyprland/hyprlock.conf).
 
-- Idle manager: `hypridle`.
+- Idle manager: [`hypridle`](./hyprland/hypridle.conf).
 
 - Shell: [`bash`](./bash).
 
 ## Desktop environment
 
-- Bar: `waybar`.
+- Bar: [`waybar`](./waybar/).
 
 - Application launcher: `hyprlauncher`.
 
-- Notifications manager: `mako`.
+- Notification manager: [`mako`](./mako/).
 
-- Wallpapers: `hyprpaper`.
+- Screenshot: `grim`, `slurp` and `swappy`.
+
+- Wallpapers: [`hyprpaper`](./hyprland/hyprpaper.conf).
 
 ## Theming and appearance
 
 - GTK Manager: `nwg-look`.
 
-- QT Manager: `qt5ct`/`qt6ct`
+- Qt6 Manager: [`hyprqt6engine`](./hyprland/hyprtoolkit.conf).
 
 - [Cursor theme](https://thispersondoesnotexist.com).
 
@@ -44,11 +46,11 @@
 
 ## Productivity
 
-- Terminal: [`kitty`](./kitty).
+- Terminal: [`kitty`](./kitty/).
 
 - Text editor.
 
-	- Terminal: [`neovim`](./nvim).
+	- Terminal: [`neovim`](./nvim/).
 
 	- GUI: `mousepad`.
 
@@ -56,7 +58,7 @@
 
 - File manager: `thunar`.
 
-- Documents viewer: `zathura`.
+- Documents viewer: [`zathura`](./zathura/).
 
 ## Media
 
@@ -66,4 +68,6 @@
 
 - Image viewer: `nsxiv`.
 
-- Music player: `rmpc`.
+- Music server: [`mpd`](./mpd/).
+
+- Music player: [`rmpc`](./rmpc/).
