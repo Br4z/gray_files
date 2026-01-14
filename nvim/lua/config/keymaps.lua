@@ -12,10 +12,10 @@ vim.g.maplocalleader = ' '
 -- --------------------------------- NORMAL --------------------------------- --
 
 -- Better window navigation
-keymap('n', '<C-h>', '<C-w>h', opts)
-keymap('n', '<C-j>', '<C-w>j', opts)
-keymap('n', '<C-k>', '<C-w>k', opts)
-keymap('n', '<C-l>', '<C-w>l', opts)
+keymap('n', '<C-n>', '<C-w>h', opts)
+keymap('n', '<C-e>', '<C-w>j', opts)
+keymap('n', '<C-i>', '<C-w>k', opts)
+keymap('n', '<C-o>', '<C-w>l', opts)
 keymap('n', '<LEADER>p', '<C-w>p', opts)
 
 -- Quick exit
@@ -32,8 +32,8 @@ keymap('n', '<C-LEFT>', ':vertical resize -2<CR>', opts)
 keymap('n', '<C-RIGHT>', ':vertical resize +2<CR>', opts)
 
 -- Buffers
-keymap('n', '<S-l>', ':bnext<CR>', opts)
-keymap('n', '<S-h>', ':bprevious<CR>', opts)
+keymap('n', '<S-o>', ':bnext<CR>', opts)
+keymap('n', '<S-n>', ':bprevious<CR>', opts)
 keymap("n", "<LEADER>c", ":bw<CR>", opts)
 
 -- --------------------------------- VISUAL --------------------------------- --
@@ -43,14 +43,14 @@ keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 
 -- Move text up and down
-keymap('v', '<A-j>', ':m .+1<CR>==', opts)
-keymap('v', '<A-k>', ':m .-2<CR>==', opts)
+keymap('v', '<A-e>', ':m .+1<CR>==', opts)
+keymap('v', '<A-i>', ':m .-2<CR>==', opts)
 
 -- ------------------------------ VISUAL BLOCK ------------------------------ --
 
 -- Move text up and down
-keymap('x', 'J', ':move \'>+1<CR>gv-gv', opts)
-keymap('x', 'K', ':move \'<-2<CR>gv-gv', opts)
+keymap('x', '<A-e>', ':move \'>+1<CR>gv-gv', opts)
+keymap('x', '<A-i>', ':move \'<-2<CR>gv-gv', opts)
 
 -- Delete single character without copying into register
 keymap("n", "x", '"_x', opts)
@@ -80,3 +80,31 @@ keymap('n', '<LEADER>fs', ':Telescope live_grep<CR>', opts) -- Find string in cu
 keymap('n', '<LEADER>fc', ':Telescope grep_string<CR>', opts) -- Find string under cursor in current working directory
 keymap('n', '<LEADER>fb', ':Telescope buffers<CR>', opts) -- List open buffers in current neovim instance
 keymap('n', '<LEADER>fh', ':Telescope help_tags<CR>', opts)
+
+-- ------------------------------- COLEMAK DH ------------------------------- --
+-- Ref: n=h, e=j, i=k, o=l
+
+local modes = { 'n', 'v', 'x', 'o' }
+for _, mode in ipairs(modes) do
+	-- Navigation
+	keymap(mode, 'n', 'h', opts)
+	keymap(mode, 'e', 'j', opts)
+	keymap(mode, 'i', 'k', opts)
+	keymap(mode, 'o', 'l', opts)
+
+	-- k -> n (Next search)
+	keymap(mode, 'k', 'n', opts)
+	keymap(mode, 'K', 'N', opts)
+
+	-- j -> e (End of word)
+	keymap(mode, 'j', 'e', opts)
+	keymap(mode, 'J', 'E', opts)
+
+	-- l -> i (Insert)
+	keymap(mode, 'l', 'i', opts)
+	keymap(mode, 'L', 'I', opts)
+
+	-- h -> o (Open line)
+	keymap(mode, 'h', 'o', opts)
+	keymap(mode, 'H', 'O', opts)
+end
