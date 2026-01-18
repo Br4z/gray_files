@@ -45,7 +45,7 @@ return {
 					}
 				},
 				footer = {
-					"NOW THE MOON I\"S RISING",
+					"NOW THE MOON IS RISING",
 				}
 			}
 		}
