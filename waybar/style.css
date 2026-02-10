@@ -1,0 +1,85 @@
+@import "colors.css";
+
+/* ------------------------------- BASE STYLES ------------------------------ */
+
+* {
+	border: none;
+	border-radius: 0;
+	font-family: "CaskaydiaMono Nerd Font Mono", monospace;
+	font-size: 14px;
+	min-height: 0;
+}
+
+window#waybar {
+	background: @background;
+	color: @foreground;
+}
+
+tooltip {
+	background: @background;
+	border: 1px solid @light_white;
+}
+
+tooltip label {
+	color: @light_white;
+}
+
+/* ------------------------------- WORKSPACES ------------------------------- */
+
+#workspaces {
+	background-color: transparent;
+	margin: 0;
+}
+
+#workspaces button {
+	padding: 0 10px;
+	background-color: transparent;
+	color: @foreground;
+	border-bottom: 3px solid transparent;
+}
+
+#workspaces button.empty {
+	color: @white;
+}
+
+#workspaces button.active {
+	color: @light_white;
+	border-bottom: 3px solid @light_white;
+}
+
+#workspaces button.visible {
+	border-bottom: 3px solid @white;
+}
+
+#workspaces button.urgent {
+	color: @red;
+	border-bottom: 3px solid @red;
+}
+
+/* --------------------------------- MODULES -------------------------------- */
+
+#mpd,
+#wireplumber,
+#cpu,
+#temperature,
+#memory,
+#network,
+#clock {
+	background-color: @light_black;
+	color: @foreground;
+	padding: 0 10px;
+	margin: 4px 2px;
+}
+
+#temperature.critical {
+	color: @red;
+}
+
+#network.disconnected {
+	color: @red;
+}
+
+#window {
+	color: @white;
+	padding: 0 10px;
+}

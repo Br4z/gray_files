@@ -1,0 +1,133 @@
+#!/bin/bash
+#  ______   __  __   __   __         __   ______   __   __ ______
+# /\  == \ /\ \/\ \ /\ "-.\ \       /\ \ /\  __ \ /\ \ / //\  __ \
+# \ \  __< \ \ \_\ \\ \ \-.  \     _\_\ \\ \  __ \\ \ \'/ \ \  __ \
+#  \ \_\ \_\\ \_____\\ \_\\"\_\   /\_____\\ \_\ \_\\ \__|  \ \_\ \_\
+#   \/_/ /_/ \/_____/ \/_/ \/_/   \/_____/ \/_/\/_/ \/_/    \/_/\/_/
+
+
+source "$HOME/.local/bin/colors_and_helpers" || { error "colors and helpers file not found"; exit 1; }
+set -uo pipefail
+
+# --------------------------- DEFAULT AND CONSTANTS -------------------------- #
+
+OUTPUT_DIR="out"
+MAIN_CLASS="src.Main"
+JAVAC_CMD="javac"
+JAVA_CMD="java"
+JAVAC_FLAGS=()
+
+# ------------------------------- USAGE BANNER ------------------------------- #
+
+usage() {
+	cat <<EOF
+Usage: $(basename "$0") [OPTIONS] [--] [program-args ...]
+
+Modes (choose one):
+	-s|--single FILE  Compile a single .java file.
+	[no -s] (default) Project mode - compile all *.java under ./src.
+
+General options:
+	-k|--keep    Keep compiled .class files/directories after execution.
+	-v|--verbose Print compilation commands.
+	-h|--help    Show this help and exit.
+All remaining arguments after "--" are passed to the program.
+EOF
+}
+
+# ----------------------------- PARSE CLI OPTIONS ---------------------------- #
+
+single_file=
+keep_compiled=false
+verbose=false
+
+# GNU getopt gives long-option support that plain getopts lacks
+PARSED=$(getopt -o s:kvh --long single:,keep,verbose,help -- "$@") || {
+	error "parsing arguments"
+	exit 1
+}
+eval set -- "$PARSED"
+while true; do
+	case "$1" in
+		-s|--single)
+			single_file=$2
+			shift 2
+			;;
+		-k|--keep)
+			keep_compiled=true
+			shift
+			;;
+		-v|--verbose)
+			verbose=true
+			shift
+			;;
+		-h|--help)
+			usage
+			exit 0
+			;;
+		--)
+			shift
+			break
+			;;
+		*)
+			error "unknown option: $1"
+			usage
+			exit 2
+			;;
+	esac
+done
+
+# Remaining tokens are runtime arguments for the compiled program
+prog_args=("$@")
+
+# ----------------------------- COMPILATION PHASE ---------------------------- #
+
+compile() {
+	if [[ -n $single_file ]]; then
+		[[ -f $single_file ]] \
+			|| { error "source file \"$single_file\" not found"; exit 1; }
+		$verbose && info "Compiling single file: $single_file"
+		$JAVAC_CMD "${JAVAC_FLAGS[@]}" "$single_file"
+	else
+		# Gather sources from src/, recurse via find
+		mapfile -t sources < <(find src -type f -name "*.java")
+		[[ ${#sources[@]} -gt 0 ]] \
+			|| { error "no .java files found under ./src"; exit 1; }
+		mkdir -p "$OUTPUT_DIR"
+		$verbose && info "Compiling project sources into $OUTPUT_DIR"
+		$JAVAC_CMD -d "$OUTPUT_DIR" "${JAVAC_FLAGS[@]}" "${sources[@]}"
+
+		# Copy assets if present
+		if [[ -d src/assets ]]; then
+			$verbose && info "Copying assets to $OUTPUT_DIR"
+			cp -R src/assets "$OUTPUT_DIR"
+		fi
+	fi
+}
+
+# ------------------------------ CLEANUP HANDLER ----------------------------- #
+
+cleanup() {
+	$keep_compiled && return
+	if [[ -n $single_file ]]; then
+		rm -f "${single_file%.java}.class"
+	else
+		rm -rf "$OUTPUT_DIR"
+	fi
+}
+trap cleanup EXIT
+
+# ---------------------------- COMPILE AND EXECUTE --------------------------- #
+
+compile
+if [[ -n $single_file ]]; then
+	class_name=$(basename "$single_file" .java)
+	$verbose && info "Running class $class_name"
+	$JAVA_CMD "$class_name" "${prog_args[@]}"
+else
+	$verbose && info "Running main class $MAIN_CLASS with -cp $OUTPUT_DIR"
+	$JAVA_CMD -cp "$OUTPUT_DIR" "$MAIN_CLASS" "${prog_args[@]}"
+fi
+exit_code=$?
+
+exit $exit_code

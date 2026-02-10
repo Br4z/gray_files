@@ -1,0 +1,95 @@
+#  ______   ______   ______  __  __   __  __   ______   ______   ______   ______
+# /\___  \ /\  __ \ /\__  _\/\ \_\ \ /\ \/\ \ /\  == \ /\  __ \ /\  == \ /\  ___\
+# \/_/  /__\ \  __ \\/_/\ \/\ \  __ \\ \ \_\ \\ \  __< \ \  __ \\ \  __< \ \ \____
+#   /\_____\\ \_\ \_\  \ \_\ \ \_\ \_\\ \_____\\ \_\ \_\\ \_\ \_\\ \_\ \_\\ \_____\
+#   \/_____/ \/_/\/_/   \/_/  \/_/\/_/ \/_____/ \/_/ /_/ \/_/\/_/ \/_/ /_/ \/_____/
+
+# ---------------------------------- BASE UI --------------------------------- #
+
+set default-bg rgba(38, 38, 38, 1.0)    # Background
+set default-fg rgba(188, 188, 188, 1.0) # Foreground
+
+set statusbar-bg rgba(28, 28, 28, 1.0)    # Black (Darker than bg for contrast)
+set statusbar-fg rgba(188, 188, 188, 1.0) # Foreground
+
+set inputbar-bg rgba(28, 28, 28, 1.0)    # Black
+set inputbar-fg rgba(255, 255, 255, 1.0) # Bright White
+
+set index-bg        rgba(38, 38, 38, 1.0)    # Background
+set index-fg        rgba(188, 188, 188, 1.0) # Foreground
+set index-active-bg rgba(95, 135, 175, 1.0)  # Blue
+set index-active-fg rgba(38, 38, 38, 1.0)    # Background
+
+# ------------------------- SELECTION AND HIGHLIGHTS ------------------------- #
+
+set highlight-color        rgba(255, 255, 255, 0.5)  # White (search results)
+set highlight-active-color rgba(255, 255, 175, 0.5) # Bright Yellow (current search result)
+
+set selection-clipboard    "clipboard"
+
+# ------------------------------- NOTIFICATIONS ------------------------------ #
+
+set notification-bg             rgba(28, 28, 28, 1.0)    # Black
+set notification-fg             rgba(188, 188, 188, 1.0) # Foreground
+
+set notification-error-bg       rgba(175, 95, 95, 1.0)   # Red
+set notification-error-fg       rgba(255, 255, 255, 1.0) # Bright White
+
+set notification-warning-bg     rgba(135, 135, 95, 1.0) # Yellow
+set notification-warning-fg     rgba(28, 28, 28, 1.0)   # Black
+
+# ------------------------------ COMPLETION MENU ----------------------------- #
+
+set completion-bg rgba(28, 28, 28, 1.0)    # Black
+set completion-fg rgba(188, 188, 188, 1.0) # Foreground
+
+set completion-highlight-bg rgba(95, 135, 175, 1.0) # Blue
+set completion-highlight-fg rgba(38, 38, 38, 1.0)   # Background
+
+set completion-group-bg rgba(38, 38, 38, 1.0)   # Background
+set completion-group-fg rgba(95, 135, 135, 1.0) # Cyan
+
+# ------------------------------- RECOLOR MODE ------------------------------- #
+
+# This determines how the PDF content itself is colored
+set recolor            "true"
+set recolor-lightcolor rgba(38, 38, 38, 1.0)    # PDF Background (Paper)
+set recolor-darkcolor  rgba(188, 188, 188, 1.0) # PDF Foreground (Text)
+# Keep original colors for images/graphs
+set recolor-keephue    "true"
+
+# ------------------------------------ FIT ----------------------------------- #
+
+map f zoom fit-page
+map w zoom fit-width
+
+# -------------------------------- NAVIGATION -------------------------------- #
+
+map n scroll left
+map e scroll down
+map i scroll up
+map o scroll right
+
+map N scroll full-left
+map E scroll full-down # Next page
+map I scroll full-up   # Previous page
+map O scroll full-right
+
+# Remap overwritten keys
+map k search next
+map K search previous
+
+# -------------------------------- INDEX MODE -------------------------------- #
+
+map [index] n navigate_index collapse
+map [index] e navigate_index down
+map [index] i navigate_index up
+map [index] o navigate_index expand
+
+map [index] N navigate_index collapse-all
+map [index] O navigate_index expand-all
+
+# ---------------------------------- CLEANUP --------------------------------- #
+
+unmap h
+unmap j

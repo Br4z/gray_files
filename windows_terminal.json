@@ -1,0 +1,709 @@
+{
+	"$help": "https://aka.ms/terminal-documentation",
+	"$schema": "https://aka.ms/terminal-profiles-schema",
+	"actions": [
+		{
+			"command": "showContextMenu",
+			"id": "User.showContextMenu"
+		},
+		{
+			"command": {
+				"action": "swapPane",
+				"direction": "down"
+			},
+			"id": "User.swapPane.F747588A"
+		},
+		{
+			"command": {
+				"action": "commandPalette"
+			},
+			"id": "User.commandPalette.D3F0B923"
+		},
+		{
+			"command": {
+				"action": "swapPane",
+				"direction": "left"
+			},
+			"id": "User.swapPane.2A0DA8E0"
+		},
+		{
+			"command": {
+				"action": "splitPane",
+				"split": "auto",
+				"splitMode": "duplicate"
+			},
+			"id": "User.splitPane.A6751878"
+		},
+		{
+			"command": {
+				"action": "moveFocus",
+				"direction": "down"
+			},
+			"id": "User.moveFocus.F747588A"
+		},
+		{
+			"command": {
+				"action": "swapPane",
+				"direction": "up"
+			},
+			"id": "User.swapPane.6CD791B"
+		},
+		{
+			"command": "paste",
+			"id": "User.paste"
+		},
+		{
+			"command": {
+				"action": "newTab"
+			},
+			"id": "User.newTab.5DEADB41"
+		},
+		{
+			"command": {
+				"action": "switchToTab",
+				"index": 1
+			},
+			"id": "User.switchToTab.2A0DA8E0"
+		},
+		{
+			"command": {
+				"action": "switchToTab",
+				"index": 0
+			},
+			"id": "User.switchToTab.D3F0B923"
+		},
+		{
+			"command": {
+				"action": "moveFocus",
+				"direction": "right"
+			},
+			"id": "User.moveFocus.87C324ED"
+		},
+		{
+			"command": {
+				"action": "quakeMode"
+			},
+			"id": "User.quakeMode.F1E129A4"
+		},
+		{
+			"command": {
+				"action": "closeTab"
+			},
+			"id": "User.closeTab.0"
+		},
+		{
+			"command": {
+				"action": "splitPane",
+				"split": "right"
+			},
+			"id": "User.splitPane.864CD510"
+		},
+		{
+			"command": {
+				"action": "splitPane",
+				"split": "down"
+			},
+			"id": "User.splitPane.D5151347"
+		},
+		{
+			"command": {
+				"action": "copy",
+				"singleLine": false
+			},
+			"id": "User.copy.644BA8F2"
+		},
+		{
+			"command": {
+				"action": "scrollDown"
+			},
+			"id": "User.scrollDown.0"
+		},
+		{
+			"command": "find",
+			"id": "User.find"
+		},
+		{
+			"command": {
+				"action": "resizePane",
+				"direction": "left"
+			},
+			"id": "User.resizePane.2A0DA8E0"
+		},
+		{
+			"command": {
+				"action": "resizePane",
+				"direction": "up"
+			},
+			"id": "User.resizePane.6CD791B"
+		},
+		{
+			"command": "openSystemMenu",
+			"id": "User.openSystemMenu"
+		},
+		{
+			"command": "duplicateTab",
+			"id": "User.duplicateTab"
+		},
+		{
+			"command": {
+				"action": "moveFocus",
+				"direction": "left"
+			},
+			"id": "User.moveFocus.2A0DA8E0"
+		},
+		{
+			"command": {
+				"action": "moveFocus",
+				"direction": "up"
+			},
+			"id": "User.moveFocus.6CD791B"
+		},
+		{
+			"command": "resetFontSize",
+			"id": "User.resetFontSize"
+		},
+		{
+			"command": "closeOtherPanes",
+			"id": "User.closeOtherPanes"
+		},
+		{
+			"command": {
+				"action": "resizePane",
+				"direction": "down"
+			},
+			"id": "User.resizePane.F747588A"
+		},
+		{
+			"command": {
+				"action": "newWindow"
+			},
+			"id": "User.newWindow.5DEADB41"
+		},
+		{
+			"command": "closePane",
+			"id": "User.closePane"
+		},
+		{
+			"command": {
+				"action": "swapPane",
+				"direction": "right"
+			},
+			"id": "User.swapPane.87C324ED"
+		},
+		{
+			"command": {
+				"action": "scrollUp"
+			},
+			"id": "User.scrollUp.0"
+		},
+		{
+			"command": "scrollUpPage",
+			"id": "User.scrollUpPage"
+		},
+		{
+			"command": "scrollDownPage",
+			"id": "User.scrollDownPage"
+		},
+		{
+			"command": {
+				"action": "resizePane",
+				"direction": "right"
+			},
+			"id": "User.resizePane.87C324ED"
+		},
+		{
+			"command": {
+				"action": "adjustFontSize",
+				"delta": 1
+			},
+			"id": "User.adjustFontSize.E04D5229"
+		},
+		{
+			"command": {
+				"action": "adjustFontSize",
+				"delta": -1
+			},
+			"id": "User.adjustFontSize.E2698FAA"
+		},
+		{
+			"command": {
+				"action": "globalSummon"
+			},
+			"id": "User.globalSummon.51A3D78C"
+		},
+		{
+			"command": {
+				"action": "switchToTab",
+				"index": 2
+			},
+			"id": "User.switchToTab.87C324ED"
+		},
+		{
+			"command": "togglePaneZoom",
+			"id": "User.togglePaneZoom"
+		},
+		{
+			"command": "markMode",
+			"id": "User.markMode"
+		}
+	],
+	"copyFormatting": "none",
+	"copyOnSelect": true,
+	"defaultProfile": "{94a7198a-f7bb-5bc4-8c42-c4f8e5372dd7}",
+	"keybindings": [
+		{
+			"id": "User.newTab.5DEADB41",
+			"keys": "ctrl+shift+enter"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+d"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+k"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+tab"
+		},
+		{
+			"id": null,
+			"keys": "alt+shift+up"
+		},
+		{
+			"id": "User.splitPane.A6751878",
+			"keys": "ctrl+enter"
+		},
+		{
+			"id": "User.closeTab.0",
+			"keys": "ctrl+shift+w"
+		},
+		{
+			"id": null,
+			"keys": "alt+shift+d"
+		},
+		{
+			"id": "User.swapPane.2A0DA8E0",
+			"keys": "alt+n"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+plus"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+minus"
+		},
+		{
+			"id": null,
+			"keys": "alt+enter"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+6"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+insert"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+9"
+		},
+		{
+			"id": "User.switchToTab.87C324ED",
+			"keys": "ctrl+3"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+8"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+home"
+		},
+		{
+			"id": "User.moveFocus.6CD791B",
+			"keys": "ctrl+i"
+		},
+		{
+			"id": null,
+			"keys": "0"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+7"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+space"
+		},
+		{
+			"id": null,
+			"keys": "alt+shift+plus"
+		},
+		{
+			"id": null,
+			"keys": "alt+space"
+		},
+		{
+			"id": null,
+			"keys": "menu"
+		},
+		{
+			"id": null,
+			"keys": "f4"
+		},
+		{
+			"id": null,
+			"keys": "9"
+		},
+		{
+			"id": "User.swapPane.87C324ED",
+			"keys": "alt+o"
+		},
+		{
+			"id": "Terminal.NextTab",
+			"keys": "ctrl+shift+n"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+4"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+7"
+		},
+		{
+			"id": null,
+			"keys": "alt+down"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+t"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+4"
+		},
+		{
+			"id": null,
+			"keys": "alt+left"
+		},
+		{
+			"id": null,
+			"keys": "alt+right"
+		},
+		{
+			"id": null,
+			"keys": "alt+up"
+		},
+		{
+			"id": "User.togglePaneZoom",
+			"keys": "alt+z"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+8"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+6"
+		},
+		{
+			"id": "User.switchToTab.2A0DA8E0",
+			"keys": "ctrl+2"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+5"
+		},
+		{
+			"id": null,
+			"keys": "alt+shift+right"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+9"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+2"
+		},
+		{
+			"id": "User.swapPane.F747588A",
+			"keys": "alt+e"
+		},
+		{
+			"id": null,
+			"keys": "enter"
+		},
+		{
+			"id": null,
+			"keys": "shift+insert"
+		},
+		{
+			"id": null,
+			"keys": "alt+shift+minus"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+q"
+		},
+		{
+			"id": "Terminal.OpenNewTabProfile1",
+			"keys": "ctrl+shift+2"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+5"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+comma"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+0"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+pgup"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+pgdn"
+		},
+		{
+			"id": null,
+			"keys": "f11"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+numpad0"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+period"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+end"
+		},
+		{
+			"id": null,
+			"keys": "alt+shift+down"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+tab"
+		},
+		{
+			"id": null,
+			"keys": "alt+shift+left"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+1"
+		},
+		{
+			"id": "User.scrollUpPage",
+			"keys": "up"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+left"
+		},
+		{
+			"id": null,
+			"keys": "win+sc(41)"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+comma"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+comma"
+		},
+		{
+			"id": "User.resizePane.87C324ED",
+			"keys": "ctrl+alt+o"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+alt+3"
+		},
+		{
+			"id": "User.closePane",
+			"keys": "ctrl+w"
+		},
+		{
+			"id": "User.adjustFontSize.E04D5229",
+			"keys": "ctrl+numpad_plus"
+		},
+		{
+			"id": "User.adjustFontSize.E2698FAA",
+			"keys": "ctrl+numpad_minus"
+		},
+		{
+			"id": "User.switchToTab.D3F0B923",
+			"keys": "ctrl+1"
+		},
+		{
+			"id": "User.resetFontSize",
+			"keys": "ctrl+numpad_multiply"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+a"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+m"
+		},
+		{
+			"id": null,
+			"keys": "alt+f4"
+		},
+		{
+			"id": "Terminal.OpenNewTabProfile0",
+			"keys": "ctrl+shift+1"
+		},
+		{
+			"id": "User.commandPalette.D3F0B923",
+			"keys": "ctrl+s"
+		},
+		{
+			"id": "Terminal.OpenNewTabProfile2",
+			"keys": "ctrl+shift+3"
+		},
+		{
+			"id": "User.moveFocus.87C324ED",
+			"keys": "ctrl+o"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+p"
+		},
+		{
+			"id": "User.resizePane.6CD791B",
+			"keys": "ctrl+alt+i"
+		},
+		{
+			"id": "Terminal.ToggleFullscreen",
+			"keys": "ctrl+m"
+		},
+		{
+			"id": "User.moveFocus.F747588A",
+			"keys": "ctrl+e"
+		},
+		{
+			"id": "User.moveFocus.2A0DA8E0",
+			"keys": "ctrl+n"
+		},
+		{
+			"id": "Terminal.PrevTab",
+			"keys": "ctrl+shift+o"
+		},
+		{
+			"id": "User.resizePane.F747588A",
+			"keys": "ctrl+alt+e"
+		},
+		{
+			"id": "User.resizePane.2A0DA8E0",
+			"keys": "ctrl+alt+n"
+		},
+		{
+			"id": "User.swapPane.6CD791B",
+			"keys": "alt+i"
+		},
+		{
+			"id": "User.scrollDownPage",
+			"keys": "down"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+up"
+		},
+		{
+			"id": null,
+			"keys": "ctrl+shift+down"
+		},
+		{
+			"id": "Terminal.ClearBuffer",
+			"keys": "ctrl+l"
+		}
+	],
+	"newTabMenu": [
+		{
+			"type": "remainingProfiles"
+		}
+	],
+	"profiles": {
+		"defaults": {
+			"colorScheme": "Apprentice"
+		},
+		"list": [
+			{
+				"commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"  --nologo",
+				"font": {
+					"face": "CaskaydiaCove Nerd Font Mono",
+					"size": 14
+				},
+				"guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+				"hidden": false,
+				"name": "PowerShell",
+				"source": "Windows.Terminal.PowershellCore"
+			},
+			{
+				"experimental.retroTerminalEffect": false,
+				"font": {
+					"face": "CaskaydiaCove Nerd Font Mono",
+					"size": 14
+				},
+				"guid": "{94a7198a-f7bb-5bc4-8c42-c4f8e5372dd7}",
+				"hidden": false,
+				"name": "Arch",
+				"source": "Microsoft.WSL"
+			},
+			{
+				"commandline": "%SystemRoot%\\System32\\cmd.exe",
+				"font": {
+					"face": "CaskaydiaCove Nerd Font Mono",
+					"size": 14
+				},
+				"guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+				"hidden": false,
+				"name": "Command prompt"
+			}
+		]
+	},
+	"schemes": [
+		{
+			"background": "#262626",
+			"black": "#1C1C1C",
+			"blue": "#5F87AF",
+			"brightBlack": "#444444",
+			"brightBlue": "#87AFD7",
+			"brightCyan": "#5FAFAF",
+			"brightGreen": "#87AF87",
+			"brightPurple": "#8787AF",
+			"brightRed": "#D78787",
+			"brightWhite": "#FFFFFF",
+			"brightYellow": "#FFFFAF",
+			"cursorColor": "#FFFFFF",
+			"cyan": "#5F8787",
+			"foreground": "#BCBCBC",
+			"green": "#5F875F",
+			"name": "Apprentice",
+			"purple": "#5F5F87",
+			"red": "#AF5F5F",
+			"selectionBackground": "#FFFFFF",
+			"white": "#6C6C6C",
+			"yellow": "#87875F"
+		}
+	],
+	"themes": []
+}

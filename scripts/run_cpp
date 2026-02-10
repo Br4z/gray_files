@@ -1,0 +1,116 @@
+#!/bin/bash
+#  ______   __  __   __   __       ______   ______  ______
+# /\  == \ /\ \/\ \ /\ "-.\ \     /\  ___\ /\  == \/\  == \
+# \ \  __< \ \ \_\ \\ \ \-.  \    \ \ \____\ \  _-/\ \  _-/
+#  \ \_\ \_\\ \_____\\ \_\\"\_\    \ \_____\\ \_\   \ \_\
+#   \/_/ /_/ \/_____/ \/_/ \/_/     \/_____/ \/_/    \/_/
+
+
+source "$HOME/.local/bin/colors_and_helpers" || { error "colors and helpers file not found"; exit 1; }
+set -uo pipefail
+
+# --------------------------- DEFAULT AND CONSTANTS -------------------------- #
+
+OUTPUT_NAME="main"
+CPP_CMD="g++"
+CPP_FLAGS=(-Wall -Wextra -Wpedantic -Werror)
+
+# ------------------------------- USAGE BANNER ------------------------------- #
+
+usage() {
+	cat <<EOF
+Usage: $(basename "$0") [OPTIONS] [--] [program-args ...]
+
+Modes (choose one):
+	-s|--single FILE  Compile a single .cpp/.c file.
+	[no -s] (default) Project mode - compile all *.cpp under \$PWD.
+
+General options:
+	-k|--keep    Keep compiled binary after execution.
+	-v|--verbose Print commands and timings.
+	-h|--help    Show this help and exit.
+All remaining arguments after "--" are passed to the program.
+EOF
+}
+
+# ----------------------------- PARSE CLI OPTIONS ---------------------------- #
+
+single_file=
+keep_compiled=false
+verbose=false
+
+# GNU getopt gives long-option support that plain getopts lacks
+PARSED=$(getopt -o s:kvh --long single:,keep,verbose,help -- "$@") || {
+	error "parsing arguments"
+	exit 1
+}
+eval set -- "$PARSED"
+while true; do
+	case "$1" in
+		-s|--single)
+			single_file=$2
+			shift 2
+			;;
+		-k|--keep)
+			keep_compiled=true
+			shift
+			;;
+		-v|--verbose)
+			verbose=true
+			shift
+			;;
+		-h|--help)
+			usage
+			exit 0
+			;;
+		--)
+			shift
+			break
+			;;
+		*)
+			error "unknown option: $1"
+			usage
+			exit 2
+			;;
+	esac
+done
+
+# Remaining tokens are runtime arguments for the compiled program
+prog_args=("$@")
+
+# ----------------------------- COMPILATION PHASE ---------------------------- #
+
+compile() {
+	local sources=()
+	if [[ -n $single_file ]]; then
+		[[ -f $single_file ]] \
+			|| { error "source file \"$single_file\" not found"; exit 1; }
+		sources=("$single_file")
+	else
+		mapfile -t sources < <(find . -type f -name "*.cpp")
+		[[ ${#sources[@]} -gt 0 ]] \
+			|| { error "no .cpp files found"; exit 1; }
+	fi
+
+	$verbose && info "Compiling with: ${CPP_CMD} ${CPP_FLAGS[*]} ${sources[*]} -o $OUTPUT_NAME"
+	$CPP_CMD "${CPP_FLAGS[@]}" "${sources[@]}" -o "$OUTPUT_NAME"
+}
+
+# ------------------------------ CLEANUP HANDLER ----------------------------- #
+
+cleanup() {
+	$keep_compiled || rm -f "$OUTPUT_NAME"
+}
+trap cleanup EXIT
+
+# ---------------------------- COMPILE AND EXECUTE --------------------------- #
+
+compile
+[[ -x ./$OUTPUT_NAME ]] \
+	|| { error "compilation produced no executable"; exit 1; }
+
+$verbose && info "Executing \"./$OUTPUT_NAME\" ${prog_args[*]}"
+"./$OUTPUT_NAME" "${prog_args[@]}"
+exit_code=$?
+
+exit $exit_code

@@ -1,0 +1,73 @@
+#!/bin/bash
+#  __  __   ______  __   __       __   ______  __   ______   ______
+# /\ \/\ \ /\__  _\/\ \ /\ \     /\ \ /\__  _\/\ \ /\  ___\ /\  ___\
+# \ \ \_\ \\/_/\ \/\ \ \\ \ \____\ \ \\/_/\ \/\ \ \\ \  __\ \ \___  \
+#  \ \_____\  \ \_\ \ \_\\ \_____\\ \_\  \ \_\ \ \_\\ \_____\\/\_____\
+#   \/_____/   \/_/  \/_/ \/_____/ \/_/   \/_/  \/_/ \/_____/ \/_____/
+
+
+source "$HOME/.local/bin/colors_and_helpers"
+
+# ---------------------------------------------------------------------------- #
+#                                    ALIASES                                   #
+# ---------------------------------------------------------------------------- #
+
+# ------------------------------------ CAT ----------------------------------- #
+
+if command_exists bat; then
+	alias cat='bat'
+	alias catn='bat --style=plain'
+	alias catnp='bat --style=plain --paging=never'
+fi
+
+# ------------------------------------ LS ------------------------------------ #
+
+if command_exists lsd; then
+	alias ll='lsd -lh --group-dirs=first'
+	alias la='lsd -a --group-dirs=first'
+	alias l='lsd --group-dirs=first'
+	alias lla='lsd -lha --group-dirs=first'
+	alias ls='lsd --group-dirs=first'
+fi
+
+# ----------------------------------- OTHER ---------------------------------- #
+
+alias cp='cp -i' # Confirm before overwriting something
+alias df='df -h' # Human-readable sizes
+alias dirty-cache='watch -t -n 1 "cat /proc/meminfo | grep Dirty"'
+alias free='free -m' # Show sizes in MB
+alias icat='kitty +kitten icat'
+alias kubectl="minikube kubectl --"
+alias nvimcf='cd ~/.config/nvim'
+
+# ---------------------------------------------------------------------------- #
+#                                   FUNCTIONS                                  #
+# ---------------------------------------------------------------------------- #
+
+function mkcd {
+	mkdir "$1"
+	cd "$1" || exit 1
+}
+
+# ex - archive extractor
+# usage: ex <file>
+function ex {
+	if [[ -f $1 ]] ; then
+		case $1 in
+			*.tar.bz2) tar xjf $1   ;;
+			*.tar.gz)  tar xzf $1   ;;
+			*.bz2)     bunzip2 $1   ;;
+			*.rar)     unrar x $1   ;;
+			*.gz)      gunzip $1    ;;
+			*.tar)     tar xf $1    ;;
+			*.tbz2)    tar xjf $1   ;;
+			*.tgz)     tar xzf $1   ;;
+			*.zip)     unzip $1     ;;
+			*.Z)       uncompress $1;;
+			*.7z)      7z x $1      ;;
+			*)         echo "'$1' cannot be extracted via ex()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}

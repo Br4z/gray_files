@@ -1,0 +1,131 @@
+#!/bin/bash
+#  ______   ______   ______   __  __       ______   __  __   ______   __
+# /\  ___\ /\  == \ /\  __ \ /\ \_\ \     /\  ___\ /\ \/\ \ /\  == \ /\ \
+# \ \ \__ \\ \  __< \ \  __ \\ \____ \    \ \ \____\ \ \_\ \\ \  __< \ \ \____
+#  \ \_____\\ \_\ \_\\ \_\ \_\\/\_____\    \ \_____\\ \_____\\ \_\ \_\\ \_____\
+#   \/_____/ \/_/ /_/ \/_/\/_/ \/_____/     \/_____/ \/_____/ \/_/ /_/ \/_____/
+
+
+source "$HOME/.local/bin/colors_and_helpers" || { error "colors and helpers file not found"; exit 1; }
+set -uo pipefail
+IFS=$'\n\t'
+
+# ------------------------------- USAGE BANNER ------------------------------- #
+
+SCRIPT_NAME=$(basename "$0")
+
+usage() {
+  cat <<EOF
+Usage: $SCRIPT_NAME -m METHOD -u URL [options]
+
+Required:
+	-m, --method   HTTP method (GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS).
+	-u, --url      Target URL.
+
+Payload options (mutually exclusive):
+	-f, --file     JSON data file to send as request body.
+	-d, --data     Raw data string to send as request body.
+
+Misc options:
+	-H, --header   Additional HTTP header (repeatable).
+	-q, --quiet    Silent mode (curl --silent --show-error).
+	-v, --verbose  Verbose curl output (-v).
+	-h, --help     Show this help.
+EOF
+}
+
+# ----------------------------- PARSE CLI OPTIONS ---------------------------- #
+
+PARSED=$(getopt -o m:u:f:d:H:qvh --long method:,url:,file:,data:,header:,quiet,verbose,help -- "$@") || {
+	error "parsing arguments"
+	exit 1
+}
+
+eval set -- "$PARSED"
+
+method=""
+url=""
+data_file=""
+inline_data=""
+headers=()
+quiet=false
+verbose=false
+
+while true; do
+	case "$1" in
+		-m|--method)  method=${2^^}; shift 2;;
+		-u|--url)     url=$2; shift 2;;
+		-f|--file)    data_file=$2; shift 2;;
+		-d|--data)    inline_data=$2; shift 2;;
+		-H|--header)  headers+=("$2"); shift 2;;
+		-q|--quiet)   quiet=true; shift;;
+		-v|--verbose) verbose=true; shift;;
+		-h|--help)    usage; exit 0;;
+		--)           shift; break;;
+		*) error "unknown option: $1"; usage; exit 1;;
+	esac
+done
+
+# -------------------------------- VALIDATION -------------------------------- #
+
+if [[ -z $method || -z $url ]]; then
+	error "--method and --url are required"
+	usage
+	exit 1
+fi
+
+case $method in
+	GET|DELETE|HEAD|OPTIONS)
+		if [[ -n $data_file || -n $inline_data ]]; then
+			error "$method requests cannot include a body"
+			exit 1
+		fi
+		;;
+	POST|PUT|PATCH)
+		if [[ -z $data_file && -z $inline_data ]]; then
+			error "$method requests require --file or --data"
+			exit 1
+		fi
+		;;
+	*)
+		error "Unsupported HTTP method ($method)"
+		exit 1
+		;;
+esac
+
+if [[ -n $data_file ]]; then
+	if [[ ! -s $data_file ]]; then
+		error "JSON file \"$data_file\" is empty or does not exist"
+		exit 1
+	fi
+	if command_exists jq; then
+		if ! jq -e . "$data_file" >/dev/null 2>&1; then
+			error "\"$data_file\" does not contain valid JSON"
+			exit 1
+		fi
+	fi
+fi
+
+# ---------------------------------------------------------------------------
+# Build curl command
+# ---------------------------------------------------------------------------
+
+curl_opts=(--fail)
+$quiet   && curl_opts+=(--silent --show-error)
+$verbose && curl_opts+=(-v)
+
+for hdr in "${headers[@]}"; do
+	curl_opts+=( -H "$hdr" )
+done
+
+if [[ -n $inline_data ]]; then
+	curl_opts+=( -H "Content-Type: application/json" --data "$inline_data" )
+fi
+
+if [[ -n $data_file ]]; then
+	curl_opts+=( -H "Content-Type: application/json" --data "@$data_file" )
+fi
+
+curl_opts+=( -X "$method" "$url" )
+
+curl ${curl_opts[@]}

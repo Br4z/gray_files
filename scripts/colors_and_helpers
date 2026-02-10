@@ -1,0 +1,40 @@
+# ---------------------------------------------------------------------------- #
+#                                    COLORS                                    #
+# ---------------------------------------------------------------------------- #
+
+# Reset color
+RESET='\e[0m'
+
+# Standard colors
+BLACK='\e[38;2;28;28;28m'
+RED='\e[38;2;175;95;95m'
+GREEN='\e[38;2;95;135;95m'
+YELLOW='\e[38;2;135;135;95m'
+BLUE='\e[38;2;95;135;175m'
+MAGENTA='\e[38;2;95;95;135m'
+CYAN='\e[38;2;95;135;135m'
+WHITE='\e[38;2;108;108;108m'
+
+# Bright colors
+BRIGHT_BLACK='\e[38;2;68;68;68m'
+BRIGHT_RED='\e[38;2;215;135;135m'
+BRIGHT_GREEN='\e[38;2;135;175;135m'
+BRIGHT_YELLOW='\e[38;2;255;255;175m'
+BRIGHT_BLUE='\e[38;2;135;175;215m'
+BRIGHT_MAGENTA='\e[38;2;135;135;175m'
+BRIGHT_CYAN='\e[38;2;95;175;175m'
+BRIGHT_WHITE='\e[38;2;255;255;255m'
+
+# ---------------------------------- HELPERS --------------------------------- #
+
+function command_exists() {
+	command -v "$1" > /dev/null 2>&1
+}
+
+info() {
+	echo -e "${GREEN}[+]${RESET} $*"
+}
+
+error() {
+	echo -e "${RED}[-]${RESET} Error: $*" >&2
+}
