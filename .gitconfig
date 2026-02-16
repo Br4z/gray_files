@@ -1,0 +1,9 @@
+[user]
+	email = 67658575+Br4z@users.noreply.github.com
+	name = br4z
+[core]
+	editor = nvim
+	autocrlf = input
+	ignorecase = false
+[init]
+	defaultBranch = main

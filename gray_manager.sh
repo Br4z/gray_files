@@ -29,21 +29,23 @@ trap cleanup EXIT
 
 # --------------------------- DEFAULT AND CONSTANTS -------------------------- #
 
-declare -r files=(
-	"hyprland/"
-	"waybar/"
-	"firefox/"
-	"bin/"
-	"kitty/"
-	"bashrc"
-	"bash_utilities"
-	"bash_profile"
-	"nvim/"
-	"mpd/"
-	"rmpc/"
-	"swappy/"
-	"mako/"
-	"zathura/"
+declare -r programs=(
+	"hyprland"
+	"waybar"
+	"firefox"
+	"bin"
+	"kitty"
+	"bash"
+	"bash"
+	"bash"
+	"nvim"
+	"mpd"
+	"rmpc"
+	"swappy"
+	"mako"
+	"zathura"
+	"git"
+	"openSSH"
 )
 
 declare -r target_paths=(
@@ -61,6 +63,8 @@ declare -r target_paths=(
 	"swappy"
 	"mako"
 	"zathura"
+	".gitconfig"
+	"ssh_config"
 )
 
 declare -r link_paths=(
@@ -78,23 +82,38 @@ declare -r link_paths=(
 	".config/swappy"
 	".config/mako"
 	".config/zathura"
+	""
+	".ssh/config"
 )
 
 # Ensure metadata integrity
-if [[ ${#files[@]} -ne ${#target_paths[@]} || ${#files[@]} -ne ${#link_paths[@]} ]]; then
+if [[ ${#programs[@]} -ne ${#target_paths[@]} || ${#programs[@]} -ne ${#link_paths[@]} ]]; then
 	error "array length mismatch\n"
 	exit 1
 fi
 
 # ------------------------------- USAGE BANNER ------------------------------- #
 
+# Description: builds the final destination path for an index.
+# Parameters:
+# 	- $1: dotfile index.
+function destination_path_for_index() {
+	local idx=$1
+	if [[ -z ${link_paths[$idx]} ]]; then
+		echo "$HOME/$(basename -- "${target_paths[$idx]}")"
+	else
+		echo "$HOME/${link_paths[$idx]}"
+	fi
+}
+
 # Description: displays the help panel with usage instructions for the script.
 # Parameters: none.
 function usage() {
 	info "Usage:\n"
-	local idx
-	for idx in "${!files[@]}"; do
-		echo -e "${GREEN}$idx${RESET}) File: ${files[idx]} Target: ${target_paths[idx]}"
+	local idx dest
+	for idx in "${!programs[@]}"; do
+		dest="$(destination_path_for_index "$idx")"
+		echo -e "${GREEN}$idx${RESET}) Program: ${programs[idx]} Destination: ${dest}"
 	done
 
 	echo -e "$\t${MAGENTA}-i${RESET} index [index ...]"
@@ -110,7 +129,7 @@ function validate_index() {
 		exit 1
 	fi
 
-	if (( idx >= ${#files[@]} )); then
+	if (( idx >= ${#programs[@]} )); then
 		error "${idx} index is out of range"
 		exit 1
 	fi
@@ -124,11 +143,11 @@ function apply_dotfiles() {
 	for idx in "$@"; do
 		validate_index "$idx"
 		source="${dotfiles_path}/${target_paths[$idx]}"
-		dest="$HOME/${link_paths[$idx]}"
+		dest="$(destination_path_for_index "$idx")"
 		# Create destination parent directory if it does not exist
 		mkdir -p "$(dirname -- "$dest")"
 		echo -e "${BLUE}$source${RESET} -> ${BLUE}$dest${RESET}"
-		ln -fs "$source" "$dest"
+		ln -sfnT "$source" "$dest"
 	done
 }
 
