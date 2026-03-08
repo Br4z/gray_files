@@ -12,48 +12,31 @@ vim.g.maplocalleader = " "
 -- --------------------------------- NORMAL --------------------------------- --
 
 -- Better window navigation
-keymap("n", "<A-i>", "<C-w>k", opts)
-keymap("n", "<A-o>", "<C-w>l", opts)
-keymap("n", "<A-e>", "<C-w>j", opts)
-keymap("n", "<A-n>", "<C-w>h", opts)
-keymap("n", "<LEADER>p", "<C-w>p", opts)
+keymap("n", "<C-i>", "<C-w>k", opts) -- Up
+keymap("n", "<C-o>", "<C-w>l", opts) -- Right
+keymap("n", "<C-e>", "<C-w>j", opts) -- Down
+keymap("n", "<C-n>", "<C-w>h", opts) -- Left
+
+-- Resize
+keymap("n", "<A-i>", ":resize -2<CR>", opts) -- Up
+keymap("n", "<A-o>", ":vertical resize +2<CR>", opts) -- Right
+keymap("n", "<A-e>", ":resize +2<CR>", opts) -- Down
+keymap("n", "<A-n>", ":vertical resize -2<CR>", opts) -- Left
 
 -- Quick exit
-keymap("n", "<LEADER>q", ":wq<CR>", opts)
-keymap("n", "<LEADER>Q", ":q!<CR>", opts)
+keymap("n", "<LEADER>q", ":wq<CR>", opts) -- Saving
+keymap("n", "<LEADER>Q", ":q!<CR>", opts) -- Without saving
 
 -- Quick write
 keymap("n", "<LEADER>w", ":w<CR>", opts)
 
--- Resize with arrows
-keymap("n", "<C-UP>", ":resize -2<CR>", opts)
-keymap("n", "<C-RIGHT>", ":vertical resize +2<CR>", opts)
-keymap("n", "<C-DOWN>", ":resize +2<CR>", opts)
-keymap("n", "<C-LEFT>", ":vertical resize -2<CR>", opts)
-
 -- Buffers
-keymap("n", "<S-o>", ":bnext<CR>", opts)
-keymap("n", "<S-n>", ":bprevious<CR>", opts)
-keymap("n", "<LEADER>c", ":bw<CR>", opts)
-
--- --------------------------------- VISUAL --------------------------------- --
-
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- Move text up and down
-keymap("v", "<A-e>", ":m .+1<CR>==", opts)
-keymap("v", "<A-i>", ":m .-2<CR>==", opts)
-
--- ------------------------------ VISUAL BLOCK ------------------------------ --
-
--- Move text up and down
-keymap("x", "<A-e>", ":move \">+1<CR>gv-gv", opts)
-keymap("x", "<A-i>", ":move \"<-2<CR>gv-gv", opts)
+keymap("n", "<Tab>", ":bnext<CR>", opts)
+keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
+keymap("n", "<LEADER>bw", ":bw<CR>", opts)
 
 -- Delete single character without copying into register
-keymap("n", "x", '_x', opts)
+-- keymap("n", "x", '_x', opts)
 
 -- Increment/decrement numbers
 keymap("n", "<LEADER>+", "<C-a>", opts)
@@ -63,7 +46,7 @@ keymap("n", "<LEADER>-", "<C-x>", opts)
 keymap("n", "<LEADER>sv", "<C-w>v", opts) -- Split window vertically
 keymap("n", "<LEADER>sh", "<C-w>s", opts) -- Split window horizontally
 keymap("n", "<LEADER>se", "<C-w>=", opts) -- Make split windows equal width and height
-keymap("n", "<LEADER>sx", ":close<CR>", opts) -- Close current split window
+keymap("n", "<LEADER>sw", ":close<CR>", opts) -- Close current split window
 
 -- Clear search highlights
 keymap("n", "<LEADER>h", ":nohl<CR>", opts)
@@ -77,6 +60,21 @@ keymap("n", "<LEADER>fs", ":Telescope live_grep<CR>", opts) -- Find string in cu
 keymap("n", "<LEADER>fc", ":Telescope grep_string<CR>", opts) -- Find string under cursor in current working directory
 keymap("n", "<LEADER>fb", ":Telescope buffers<CR>", opts) -- List open buffers in current neovim instance
 keymap("n", "<LEADER>fh", ":Telescope help_tags<CR>", opts)
+
+-- --------------------------------- VISUAL --------------------------------- --
+
+-- Stay in indent mode
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
+keymap("v", "<S-e>", ":m .+1<CR>==", opts)
+keymap("v", "<S-i>", ":m .-2<CR>==", opts)
+
+-- ------------------------------ VISUAL BLOCK ------------------------------ --
+
+-- Move text up and down
+keymap("x", "<S-e>", ":move \">+1<CR>gv-gv", opts)
+keymap("x", "<S-i>", ":move \"<-2<CR>gv-gv", opts)
 
 -- ------------------------------- COLEMAK DH ------------------------------- --
 -- n = h, e = j, i = k, o = l
