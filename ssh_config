@@ -9,3 +9,9 @@ Host github_work
 	User git
 	IdentityFile ~/.ssh/work
 	IdentitiesOnly yes
+
+Host gitlab
+	HostName gitlab-ssh.endava.com
+	User git
+	IdentityFile ~/.ssh/gitlab
+	IdentitiesOnly yes
