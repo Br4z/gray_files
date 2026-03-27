@@ -1,13 +1,13 @@
 Host github_personal
 	HostName github.com
 	User git
-	IdentityFile ~/.ssh/personal
+	IdentityFile ~/.ssh/github_personal
 	IdentitiesOnly yes
 
-Host github_work
+Host github_job
 	HostName github.com
 	User git
-	IdentityFile ~/.ssh/work
+	IdentityFile ~/.ssh/github_job
 	IdentitiesOnly yes
 
 Host gitlab
