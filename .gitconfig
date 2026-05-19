@@ -7,3 +7,11 @@
 	ignorecase = false
 [init]
 	defaultBranch = main
+[safe]
+	directory = %(prefix)///wsl.localhost/archlinux/home/brandon/programming/TerraformLab
+	directory = %(prefix)///wsl.localhost/archlinux/home/brandon/programming
+	directory = %(prefix)///wsl.localhost/archlinux/home/brandon/programming/SST_indicators_hub
+	directory = %(prefix)///wsl.localhost/archlinux/home/brandon/programming/SST_indicators_hub/src/api
+	directory = %(prefix)///wsl.localhost/archlinux/home/brandon/programming/SST_indicators_hub/src/data_worker
+	directory = %(prefix)///wsl.localhost/archlinux/home/brandon/programming/SST_indicators_hub/.git
+	directory = %(prefix)///wsl.localhost/archlinux/home/brandon/programming/SST_indicators_hub/src/frontend
