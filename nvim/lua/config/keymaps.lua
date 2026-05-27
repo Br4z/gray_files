@@ -18,9 +18,9 @@ keymap("n", "<C-e>", "<C-w>j", opts) -- Down
 keymap("n", "<C-n>", "<C-w>h", opts) -- Left
 
 -- Resize
-keymap("n", "<A-i>", ":resize -2<CR>", opts) -- Up
+keymap("n", "<A-i>", ":resize -2<CR>", opts)    -- Up
 keymap("n", "<A-o>", ":vertical resize +2<CR>", opts) -- Right
-keymap("n", "<A-e>", ":resize +2<CR>", opts) -- Down
+keymap("n", "<A-e>", ":resize +2<CR>", opts)          -- Down
 keymap("n", "<A-n>", ":vertical resize -2<CR>", opts) -- Left
 
 -- Quick exit
@@ -43,9 +43,9 @@ keymap("n", "<LEADER>+", "<C-a>", opts)
 keymap("n", "<LEADER>-", "<C-x>", opts)
 
 -- Window management
-keymap("n", "<LEADER>sv", "<C-w>v", opts) -- Split window vertically
-keymap("n", "<LEADER>sh", "<C-w>s", opts) -- Split window horizontally
-keymap("n", "<LEADER>se", "<C-w>=", opts) -- Make split windows equal width and height
+keymap("n", "<LEADER>sv", "<C-w>v", opts)     -- Split window vertically
+keymap("n", "<LEADER>sh", "<C-w>s", opts)     -- Split window horizontally
+keymap("n", "<LEADER>se", "<C-w>=", opts)     -- Make split windows equal width and height
 keymap("n", "<LEADER>sw", ":close<CR>", opts) -- Close current split window
 
 -- Clear search highlights
@@ -55,10 +55,10 @@ keymap("n", "<LEADER>h", ":nohl<CR>", opts)
 keymap("n", "<LEADER>e", ":Lexplore<CR>", opts)
 
 -- Telescope
-keymap("n", "<LEADER>ff", ":Telescope find_files<CR>", opts) -- Find files within current working directory, respects .gitignore
-keymap("n", "<LEADER>fs", ":Telescope live_grep<CR>", opts) -- Find string in current working directory as you type
+keymap("n", "<LEADER>ff", ":Telescope find_files<CR>", opts)  -- Find files within current working directory, respects .gitignore
+keymap("n", "<LEADER>fs", ":Telescope live_grep<CR>", opts)   -- Find string in current working directory as you type
 keymap("n", "<LEADER>fc", ":Telescope grep_string<CR>", opts) -- Find string under cursor in current working directory
-keymap("n", "<LEADER>fb", ":Telescope buffers<CR>", opts) -- List open buffers in current neovim instance
+keymap("n", "<LEADER>fb", ":Telescope buffers<CR>", opts)     -- List open buffers in current neovim instance
 keymap("n", "<LEADER>fh", ":Telescope help_tags<CR>", opts)
 
 -- --------------------------------- VISUAL --------------------------------- --
@@ -81,25 +81,25 @@ keymap("x", "<S-i>", ":move \"<-2<CR>gv-gv", opts)
 
 local modes = { "n", "v", "x", "o" }
 for _, mode in ipairs(modes) do
-	-- Navigation
-	keymap(mode, "n", "h", opts)
-	keymap(mode, "e", "j", opts)
-	keymap(mode, "i", "k", opts)
-	keymap(mode, "o", "l", opts)
+  -- Navigation
+  keymap(mode, "n", "h", opts)
+  keymap(mode, "e", "j", opts)
+  keymap(mode, "i", "k", opts)
+  keymap(mode, "o", "l", opts)
 
-	-- k -> n (Next search)
-	keymap(mode, "k", "n", opts)
-	keymap(mode, "K", "N", opts)
+  -- k -> n (next search)
+  keymap(mode, "k", "n", opts)
+  keymap(mode, "K", "N", opts)
 
-	-- j -> e (End of word)
-	keymap(mode, "j", "e", opts)
-	keymap(mode, "J", "E", opts)
+  -- j -> e (end of word)
+  keymap(mode, "j", "e", opts)
+  keymap(mode, "J", "E", opts)
 
-	-- l -> i (Insert)
-	keymap(mode, "l", "i", opts)
-	keymap(mode, "L", "I", opts)
+  -- l -> i (insert)
+  keymap(mode, "l", "i", opts)
+  keymap(mode, "L", "I", opts)
 
-	-- h -> o (Open line)
-	keymap(mode, "h", "o", opts)
-	keymap(mode, "H", "O", opts)
+  -- h -> o (open line)
+  keymap(mode, "h", "o", opts)
+  keymap(mode, "H", "O", opts)
 end

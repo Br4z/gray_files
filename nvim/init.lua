@@ -4,6 +4,6 @@
 --  \ \_\  \ \_\\"\_\  \ \_\    \ \_\
 --   \/_/   \/_/ \/_/   \/_/     \/_/
 
-require("config.options")
 require("config.keymaps")
-require("config.lazy")
+require("config.options")
+require("config.pack")
