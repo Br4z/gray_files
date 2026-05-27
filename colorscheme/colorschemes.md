@@ -28,7 +28,7 @@ white   = #6C6C6C
 
 > [colors visualization](https://coolors.co/1c1c1c-af5f5f-5f875f-87875f-5f87af-5f5f87-5f8787-6c6c6c).
 
-## Bright (Apprentice)
+## Light (Apprentice)
 
 ```INI
 black   = #444444
@@ -41,6 +41,6 @@ cyan    = #5FAFAF
 white   = #FFFFFF
 ```
 
-![Bright visualization](./Apprentice-bright.png)
+![Light visualization](./Apprentice-light.png)
 
 > [colors visualization](https://coolors.co/444444-d78787-87af87-ffffaf-87afd7-8787af-5fafaf-ffffff).
