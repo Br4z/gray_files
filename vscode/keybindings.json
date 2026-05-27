@@ -114,22 +114,22 @@
     "command": "workbench.action.moveActiveEditorGroupLeft"
   },
   {
-    "key": "ctrl+up",
+    "key": "alt+i",
     "command": "workbench.action.decreaseViewHeight",
     "when": "editorFocus"
   },
   {
-    "key": "ctrl+right",
+    "key": "alt+o",
     "command": "workbench.action.increaseViewWidth",
     "when": "editorFocus"
   },
   {
-    "key": "ctrl+down",
+    "key": "alt+e",
     "command": "workbench.action.increaseViewHeight",
     "when": "editorFocus"
   },
   {
-    "key": "ctrl+left",
+    "key": "alt+n",
     "command": "workbench.action.decreaseViewWidth",
     "when": "editorFocus"
   },
@@ -171,13 +171,13 @@
     "when": "terminalFocus && terminalHasBeenCreated && !accessibilityModeEnabled || terminalFocus && terminalProcessSupported && !accessibilityModeEnabled"
   },
   {
-    "key": "up",
-    "command": "workbench.action.terminal.scrollUp",
+    "key": "ctrl+up",
+    "command": "workbench.action.terminal.scrollUpPage",
     "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"
   },
   {
-    "key": "down",
-    "command": "workbench.action.terminal.scrollDown",
+    "key": "ctrl+down",
+    "command": "workbench.action.terminal.scrollDownPage",
     "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"
   },
 

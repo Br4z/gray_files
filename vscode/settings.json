@@ -318,6 +318,7 @@
 
   /* -------------------------------- PRETTIER -------------------------------- */
 
+  "prettier.configPath": "/home/brandon/programming/.prettierrc.json",
   "prettier.requireConfig": true,
   "prettier.useEditorConfig": true,
   "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
