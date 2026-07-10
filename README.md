@@ -37,22 +37,20 @@
 - Font manager: `font-manager`.
 
 - Fonts.
+    - Programming: `ttf-cascadia-mono-nerd`.
 
-	- Programming: `ttf-cascadia-mono-nerd`.
+    - Japanese: `noto-fonts-cjk`.
 
-	- Japanese: `noto-fonts-cjk`.
-
-	- Symbols: `noto-fonts-emoji` and `otf-font-awesome`.
+    - Symbols: `noto-fonts-emoji` and `otf-font-awesome`.
 
 ## Productivity
 
 - Terminal: [`kitty`](./kitty/).
 
 - Text editor.
+    - Terminal: [`neovim`](./nvim/).
 
-	- Terminal: [`neovim`](./nvim/).
-
-	- GUI: `mousepad`.
+    - GUI: `mousepad`.
 
 - IDE: `visual-studio-code-bin`.
 

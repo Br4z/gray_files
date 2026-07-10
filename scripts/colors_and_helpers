@@ -16,25 +16,41 @@ CYAN='\e[38;2;95;135;135m'
 WHITE='\e[38;2;108;108;108m'
 
 # Bright colors
-BRIGHT_BLACK='\e[38;2;68;68;68m'
-BRIGHT_RED='\e[38;2;215;135;135m'
-BRIGHT_GREEN='\e[38;2;135;175;135m'
-BRIGHT_YELLOW='\e[38;2;255;255;175m'
-BRIGHT_BLUE='\e[38;2;135;175;215m'
-BRIGHT_MAGENTA='\e[38;2;135;135;175m'
-BRIGHT_CYAN='\e[38;2;95;175;175m'
-BRIGHT_WHITE='\e[38;2;255;255;255m'
+BLACK_LIGHT='\e[38;2;68;68;68m'
+RED_LIGHT='\e[38;2;215;135;135m'
+GREEN_LIGHT='\e[38;2;135;175;135m'
+YELLOW_LIGHT='\e[38;2;255;255;175m'
+BLUE_LIGHT='\e[38;2;135;175;215m'
+MAGENTA_LIGHT='\e[38;2;135;135;175m'
+CYAN_LIGHT='\e[38;2;95;175;175m'
+WHITE_LIGHT='\e[38;2;255;255;255m'
 
 # ---------------------------------- HELPERS --------------------------------- #
 
+# Description: handle the Ctrl+C signal and exit the program.
+# Parameters: none.
+function cleanup() {
+  echo -e "${RED}[-]${RESET}Exiting...\n"
+  # Restore cursor only for interactive runs
+  if [[ -t 1 ]]; then
+    tput cnorm || true
+  fi
+}
+
+# Description: check if a command exists in the system.
+# Parameters: the name of the command to check.
 function command_exists() {
-	command -v "$1" > /dev/null 2>&1
+  command -v "$1" > /dev/null 2>&1
 }
 
+# Description: print an informational message in green color.
+# Parameters: the message to print.
 info() {
-	echo -e "${GREEN}[+]${RESET} $*"
+  echo -e "${GREEN}[+]${RESET} Info: $*"
 }
 
+# Description: print an error message in red color.
+# Parameters: the message to print.
 error() {
-	echo -e "${RED}[-]${RESET} Error: $*" >&2
+  echo -e "${RED}[-]${RESET} Error: $*" >&2
 }

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -euo pipefail
+source "$HOME/.local/bin/colors_and_helpers"
+branch="$(git branch --show-current)"
+
+if [[ "$branch" = "develop" ]]; then
+  info "already on develop. no branch deleted."
+  exit 0
+fi
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  error "working tree is not clean. commit, stash or discard changes first."
+  exit 1
+fi
+
+git push
+git switch develop
+git pull origin develop
+git branch -d "$branch"
+

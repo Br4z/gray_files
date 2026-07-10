@@ -32,7 +32,7 @@ fi
 # fi
 
 # Optimized git branch parsing with error handling
-parse_git_branch() {
+function parse_git_branch {
   local branch
   if branch=$(git symbolic-ref --short HEAD 2>/dev/null); then # Try regular branch first
     echo "$branch"
@@ -43,7 +43,7 @@ parse_git_branch() {
 
 # Non-ASCII characters that Oh My Posh contains cause incorrect behavior with
 # ble.sh
-_set_kali_prompt() {
+function _set_kali_prompt {
   local exit_code=$? # Exit code of the previous command
   local RESET='\[\e[0m\]'
   local RED='\[\e[0;31m\]'
@@ -112,5 +112,5 @@ _set_kali_prompt() {
 PROMPT_COMMAND="_set_kali_prompt"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"

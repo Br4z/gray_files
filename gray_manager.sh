@@ -1,28 +1,19 @@
 #!/bin/bash
-#  ______   ______   ______   __  __       __    __   ______   __   __   ______   ______   ______   ______
-# /\  ___\ /\  == \ /\  __ \ /\ \_\ \     /\ "-./  \ /\  __ \ /\ "-.\ \ /\  __ \ /\  ___\ /\  ___\ /\  == \
-# \ \ \__ \\ \  __< \ \  __ \\ \____ \    \ \ \-./\ \\ \  __ \\ \ \-.  \\ \  __ \\ \ \__ \\ \  __\ \ \  __<
-#  \ \_____\\ \_\ \_\\ \_\ \_\\/\_____\    \ \_\ \ \_\\ \_\ \_\\ \_\\"\_\\ \_\ \_\\ \_____\\ \_____\\ \_\ \_\
-#   \/_____/ \/_/ /_/ \/_/\/_/ \/_____/     \/_/  \/_/ \/_/\/_/ \/_/ \/_/ \/_/\/_/ \/_____/ \/_____/ \/_/ /_/
-
-dotfiles_path="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-
-if [[ ! -f "$HOME/.local/bin/colors_and_helpers" ]]; then
-  mkdir -p "$HOME/.local/bin/"
-  ln -fs "$dotfiles_path/scripts/colors_and_helpers" "$HOME/.local/bin/"
-fi
-source "$HOME/.local/bin/colors_and_helpers"
+#   ______   ______   ______   __  __       __    __   ______   __   __   ______   ______   ______   ______
+#  /\  ___\ /\  == \ /\  __ \ /\ \_\ \     /\ "-./  \ /\  __ \ /\ "-.\ \ /\  __ \ /\  ___\ /\  ___\ /\  == \
+#  \ \ \__ \\ \  __< \ \  __ \\ \____ \    \ \ \-./\ \\ \  __ \\ \ \-.  \\ \  __ \\ \ \__ \\ \  __\ \ \  __<
+#   \ \_____\\ \_\ \_\\ \_\ \_\\/\_____\    \ \_\ \ \_\\ \_\ \_\\ \_\\"\_\\ \_\ \_\\ \_____\\ \_____\\ \_\ \_\
+#    \/_____/ \/_/ /_/ \/_/\/_/ \/_____/     \/_/  \/_/ \/_/\/_/ \/_/ \/_/ \/_/\/_/ \/_____/ \/_____/ \/_/ /_/
 
 set -euo pipefail
 
-# Description: handle the Ctrl+C signal and exit the program.
-# Parameters: none.
-function cleanup() {
-  # Restore cursor only for interactive runs
-  if [[ -t 1 ]]; then
-    tput cnorm || true
-  fi
-}
+DOTFILES_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+if [[ ! -d "$HOME/.local/scripts/" ]]; then
+  mkdir -p "$HOME/.local/"
+  ln -fs "$DOTFILES_DIR/scripts/" "$HOME/.local/"
+fi
+source "$HOME/.local/scripts/colors_and_helpers"
 
 trap cleanup EXIT
 
@@ -147,7 +138,7 @@ function apply_dotfiles() {
   local idx source dest
   for idx in "$@"; do
     validate_index "$idx"
-    source="${dotfiles_path}/${target_paths[$idx]}"
+    source="${DOTFILES_DIR}/${target_paths[$idx]}"
     dest="$(destination_path_for_index "$idx")"
     # Create destination parent directory if it does not exist
     mkdir -p "$(dirname -- "$dest")"
