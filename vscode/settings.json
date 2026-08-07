@@ -1,6 +1,6 @@
 {
   /* -------------------------------------------------------------------------- */
-  /*                              APPEARENCE AND UI                             */
+  /*                              APPEARANCE AND UI                             */
   /* -------------------------------------------------------------------------- */
 
   /* ----------------------------- GENERAL LAYOUT ----------------------------- */
@@ -13,6 +13,15 @@
   "workbench.editor.showTabs": "single",
   "workbench.editor.editorActionsLocation": "hidden",
   "zenMode.hideLineNumbers": false,
+
+  /* -------------------------------- WINDOW ---------------------------------- */
+
+  "window.newWindowProfile": "Default",
+
+  /* ----------------------------- FILE EXPLORER ------------------------------ */
+
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
 
   /* ---------------------------- FONT AND THEMING ---------------------------- */
 
@@ -29,20 +38,18 @@
           "constant",
           "storage.modifier",
           "storage.type.class.js",
-          "keyword",
+          "keyword"
         ],
         "settings": {
-          "fontStyle": "italic bold",
-        },
-      },
-    ],
+          "fontStyle": "italic bold"
+        }
+      }
+    ]
   },
 
   /* -------------------------------------------------------------------------- */
   /*                              EDITOR BEHAVIOUR                              */
   /* -------------------------------------------------------------------------- */
-
-  "window.newWindowProfile": "Default",
 
   /* -------------------------- CURSOR AND SCROLLING -------------------------- */
 
@@ -50,6 +57,7 @@
   "workbench.list.smoothScrolling": true,
   "editor.cursorBlinking": "expand",
   "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorSurroundingLines": 8,
 
   /* -------------------- CODE INTELLIGENCE AND ASSISTANCE -------------------- */
 
@@ -58,9 +66,11 @@
   "editor.linkedEditing": true,
   "editor.stickyScroll.enabled": true,
   "workbench.tree.enableStickyScroll": true,
+  "editor.acceptSuggestionOnEnter": "on",
 
   /* ---------------------- VISUAL GUIDES AND WHITESPACE ---------------------- */
 
+  "editor.lineNumbers": "relative",
   "editor.renderWhitespace": "all",
   "editor.minimap.enabled": false,
   "editor.glyphMargin": false,
@@ -88,10 +98,8 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.wordWrap": "off",
   "editor.codeActionsOnSave": {
-    "source.sortImports": "always",
+    "source.sortImports": "always"
   },
-  "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false,
 
   /* -------------------------------------------------------------------------- */
   /*                                  TERMINAL                                  */
@@ -108,120 +116,131 @@
 
   /* ----------------------------------- VIM ---------------------------------- */
 
-  "editor.lineNumbers": "relative",
   "vim.useSystemClipboard": true,
   "vim.leader": "<space>",
   "vim.startInInsertMode": true,
-  "vim.useCtrlKeys": false,
+  "vim.hlsearch": true,
+  "vim.showcmd": true,
   "vim.highlightedyank.enable": true,
   "vim.highlightedyank.color": "#6C6C6C",
   "vim.highlightedyank.textColor": "#FFFFFF",
-  "vim.hlsearch": true,
-  "vim.showcmd": true,
+  "vim.useCtrlKeys": true,
+  "vim.handleKeys": {
+    "<C-r>": false, // workbench.action.togglePanel
+    "<C-s>": false // workbench.action.showCommands
+  },
+
   "vim.normalModeKeyBindingsNonRecursive": [
-    // Navigation
-    { "before": ["n"], "after": ["h"] },
-    { "before": ["e"], "after": ["j"] },
-    { "before": ["i"], "after": ["k"] },
-    { "before": ["o"], "after": ["l"] },
+    { "before": ["n"], "after": ["h"] }, // Left
+    { "before": ["e"], "after": ["j"] }, // Down
+    { "before": ["i"], "after": ["k"] }, // Up
+    { "before": ["o"], "after": ["l"] }, // Right
 
-    // Insert
-    { "before": ["l"], "after": ["i"] },
-    { "before": ["L"], "after": ["I"] },
+    { "before": ["l"], "after": ["i"] }, // Insert
+    { "before": ["h"], "after": ["o"] }, // Open line below
+    { "before": ["j"], "after": ["e"] }, // End of word
+    { "before": ["k"], "after": ["n"] }, // Next match
 
-    // Open line
-    { "before": ["h"], "after": ["o"] },
-    { "before": ["H"], "after": ["O"] },
+    { "before": ["N"], "after": ["H"] }, // Top of screen
+    { "before": ["E"], "after": ["J"] }, // Join lines
+    { "before": ["I"], "commands": ["editor.action.showHover"] }, // K, via command
+    { "before": ["O"], "after": ["L"] }, // Bottom of screen
 
-    // End of word
-    { "before": ["j"], "after": ["e"] },
-    { "before": ["J"], "after": ["E"] },
+    { "before": ["L"], "after": ["I"] }, // Insert at first non-blank
+    { "before": ["H"], "after": ["O"] }, // Open line above
+    { "before": ["J"], "after": ["E"] }, // End of WORD
+    { "before": ["K"], "after": ["N"] }, // Previous match
 
-    // Next search
-    { "before": ["k"], "after": ["n"] },
-    { "before": ["K"], "after": ["N"] },
+    // Redo. <C-r> now belongs to VSCode (see vim.handleKeys above), and U
+    // is free because the permutation never claims it
+    { "before": ["U"], "after": ["<C-r>"] },
+
+    {
+      "before": ["<leader>", "b"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
 
     // Splits
     {
       "before": ["<leader>", "s", "v"],
-      "commands": ["workbench.action.newGroupRight"],
+      "commands": ["workbench.action.newGroupRight"]
     },
     {
       "before": ["<leader>", "s", "h"],
-      "commands": ["workbench.action.newGroupBelow"],
+      "commands": ["workbench.action.newGroupBelow"]
     },
     {
       "before": ["<leader>", "s", "e"],
-      "commands": ["workbench.action.evenEditorWidths"],
+      "commands": ["workbench.action.evenEditorWidths"]
     },
 
     // Coding
     {
       "before": ["<leader>", "c", "c"],
-      "commands": ["editor.action.commentLine"],
+      "commands": ["editor.action.commentLine"]
     },
     { "before": ["<leader>", "c", "r"], "commands": ["editor.action.rename"] },
     {
       "before": ["<leader>", "c", "a", "s"],
-      "commands": ["workbench.action.showAllSymbols"],
+      "commands": ["workbench.action.showAllSymbols"]
     },
     {
       "before": ["<leader>", "c", "s"],
-      "commands": ["workbench.action.gotoSymbol"],
+      "commands": ["workbench.action.gotoSymbol"]
     },
 
     // Go to
     {
       "before": ["<leader>", "g", "d"],
-      "commands": ["editor.action.revealDefinition"],
+      "commands": ["editor.action.revealDefinition"]
     },
     {
       "before": ["<leader>", "g", "r"],
-      "commands": ["editor.action.goToReferences"],
+      "commands": ["editor.action.goToReferences"]
     },
     {
       "before": ["<leader>", "g", "i"],
-      "commands": ["editor.action.goToImplementation"],
+      "commands": ["editor.action.goToImplementation"]
     },
 
     // Debug
     {
       "before": ["<leader>", "d", "a"],
-      "commands": ["workbench.action.debug.selectandstart"],
+      "commands": ["workbench.action.debug.selectandstart"]
     },
     {
       "before": ["<leader>", "d", "t"],
-      "commands": ["workbench.action.debug.stop"],
+      "commands": ["workbench.action.debug.stop"]
     },
     {
       "before": ["<leader>", "d", "o"],
-      "commands": ["workbench.action.debug.stepOver"],
+      "commands": ["workbench.action.debug.stepOver"]
     },
     {
       "before": ["<leader>", "d", "b"],
-      "commands": ["editor.debug.action.toggleBreakpoint"],
+      "commands": ["editor.debug.action.toggleBreakpoint"]
     },
     {
       "before": ["<leader>", "d", "e"],
-      "commands": ["editor.debug.action.showDebugHover"],
+      "commands": ["editor.debug.action.showDebugHover"]
     },
     {
       "before": ["<leader>", "d", "c"],
-      "commands": ["workbench.action.debug.continue"],
+      "commands": ["workbench.action.debug.continue"]
     },
 
     // Pseudo Telescope
     {
       "before": ["<leader>", "f", "f"],
-      "commands": ["workbench.action.quickOpen"],
+      "commands": ["workbench.action.quickOpen"]
     },
     {
       "before": ["<leader>", "f", "s"],
-      "commands": ["workbench.action.findInFiles"],
+      "commands": ["workbench.action.findInFiles"]
     },
     {
       "before": ["<leader>", "f", "b"],
-      "commands": ["workbench.action.showAllEditors"],
+      "commands": ["workbench.action.showAllEditors"]
     },
 
     // Increment/decrement numbers
@@ -231,94 +250,86 @@
     // Toggle file explorer
     {
       "before": ["<leader>", "e"],
-      "commands": ["workbench.files.action.focusFilesExplorer"],
+      "commands": ["workbench.files.action.focusFilesExplorer"]
     },
 
-    // Close editor
+    // Close editor / close group
     {
       "before": ["<leader>", "w"],
-      "commands": ["workbench.action.closeActiveEditor"],
+      "commands": ["workbench.action.closeActiveEditor"]
     },
-
-    // Close group
     {
       "before": ["<leader>", "W"],
-      "commands": ["workbench.action.closeEditorsInGroup"],
+      "commands": ["workbench.action.closeEditorsInGroup"]
     },
-
-    // Hover
-    { "before": ["I"], "commands": ["editor.action.showHover"] },
 
     // Toggle zen mode
     {
       "before": ["<leader>", "z"],
-      "commands": ["workbench.action.toggleZenMode"],
+      "commands": ["workbench.action.toggleZenMode"]
     },
 
     // Toggle monocle mode
     {
       "before": ["<leader>", "m"],
-      "commands": ["workbench.action.toggleMaximizeEditorGroup"],
-    },
+      "commands": ["workbench.action.toggleMaximizeEditorGroup"]
+    }
   ],
+
   "vim.visualModeKeyBindingsNonRecursive": [
-    // Navigation
-    { "before": ["n"], "after": ["h"] },
-    { "before": ["e"], "after": ["j"] },
-    { "before": ["i"], "after": ["k"] },
-    { "before": ["o"], "after": ["l"] },
+    { "before": ["n"], "after": ["h"] }, // Left
+    { "before": ["e"], "after": ["j"] }, // Down
+    { "before": ["i"], "after": ["k"] }, // Up
+    { "before": ["o"], "after": ["l"] }, // Right
 
-    // Insert / Inner text object
-    { "before": ["l"], "after": ["i"] },
-    { "before": ["L"], "after": ["I"] },
+    { "before": ["l"], "after": ["i"] }, // Inner text object
+    { "before": ["h"], "after": ["o"] }, // Other end of selection
+    { "before": ["j"], "after": ["e"] }, // End of word
+    { "before": ["k"], "after": ["n"] }, // Next match
 
-    // Other end of selection
-    { "before": ["h"], "after": ["o"] },
-    { "before": ["H"], "after": ["O"] },
+    { "before": ["N"], "after": ["H"] }, // Top of screen
+    { "before": ["E"], "commands": ["editor.action.moveLinesDownAction"] }, // NOT J
+    { "before": ["I"], "commands": ["editor.action.moveLinesUpAction"] }, // NOT K
+    { "before": ["O"], "after": ["L"] }, // Bottom of screen
 
-    // End of word
-    { "before": ["j"], "after": ["e"] },
-    { "before": ["J"], "after": ["E"] },
-
-    // Next search
-    { "before": ["k"], "after": ["n"] },
-    { "before": ["K"], "after": ["N"] },
-
-    // Move lines
-    { "before": ["I"], "commands": ["editor.action.moveLinesUpAction"] },
-    { "before": ["E"], "commands": ["editor.action.moveLinesDownAction"] },
+    { "before": ["L"], "after": ["I"] }, // Blockwise insert
+    { "before": ["H"], "after": ["O"] }, // Other corner of block
+    { "before": ["J"], "after": ["E"] }, // End of WORD
+    { "before": ["K"], "after": ["N"] }, // Previous match
 
     // Coding
     {
       "before": ["<leader>", "c", "c"],
-      "commands": ["editor.action.blockComment"],
+      "commands": ["editor.action.blockComment"]
     },
+
+    // Keep the selection after indent/outdent
     { "before": ["<"], "after": ["<", "g", "v"] },
-    { "before": [">"], "after": [">", "g", "v"] },
+    { "before": [">"], "after": [">", "g", "v"] }
   ],
+
   "vim.operatorPendingModeKeyBindingsNonRecursive": [
-    // Navigation
-    { "before": ["n"], "after": ["h"] },
-    { "before": ["e"], "after": ["j"] },
-    { "before": ["i"], "after": ["k"] },
-    { "before": ["o"], "after": ["l"] },
+    // Motions only — h/H (open line) and E/I have no meaning here
 
-    // Insert / Inner text object
-    { "before": ["l"], "after": ["i"] },
-    { "before": ["L"], "after": ["I"] },
+    { "before": ["n"], "after": ["h"] }, // Left
+    { "before": ["e"], "after": ["j"] }, // Down
+    { "before": ["i"], "after": ["k"] }, // Up
+    { "before": ["o"], "after": ["l"] }, // Right
 
-    // End of word
-    { "before": ["j"], "after": ["e"] },
-    { "before": ["J"], "after": ["E"] },
+    { "before": ["l"], "after": ["i"] }, // Inner text object
+    { "before": ["j"], "after": ["e"] }, // End of word
+    { "before": ["k"], "after": ["n"] }, // Next match
 
-    // Next search
-    { "before": ["k"], "after": ["n"] },
-    { "before": ["K"], "after": ["N"] },
+    { "before": ["N"], "after": ["H"] }, // Top of screen
+    { "before": ["O"], "after": ["L"] }, // Bottom of screen
+    { "before": ["L"], "after": ["I"] }, // Around/inner variant
+    { "before": ["J"], "after": ["E"] }, // End of WORD
+    { "before": ["K"], "after": ["N"] } // Previous match
   ],
 
   /* -------------------------------- PRETTIER -------------------------------- */
 
-  "prettier.configPath": "/home/brandon/programming/.prettierrc.json",
+  "prettier.configPath": "/home/brandon/.config/prettierrc.json",
   "prettier.requireConfig": true,
   "prettier.useEditorConfig": true,
   "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
@@ -338,7 +349,13 @@
   "[svelte]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[astro]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
 
-  /* ----------------------------------- AI ----------------------------------- */
+  /* ------------------------------- GIT BLAME -------------------------------- */
+
+  "gitblame.inlineMessageEnabled": true,
+
+  /* -------------------------------------------------------------------------- */
+  /*                                     AI                                     */
+  /* -------------------------------------------------------------------------- */
 
   // "github.copilot.enable": {
   //   "*": false
@@ -346,17 +363,17 @@
   "chat.viewSessions.enabled": false,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "When generating commit messages, use exactly: <type>(<scope>): <short_summary>.",
+      "text": "When generating commit messages, use exactly: <type>(<scope>): <short_summary>."
     },
     {
-      "text": "Allowed types: feat, fix, docs, style, perf, test, build, chore, revert.",
+      "text": "Allowed types: feat, fix, docs, style, perf, test, build, chore, revert."
     },
     {
-      "text": "Allowed scopes: api, service, core, config, db, auth, ui, test, docs, lint, deps, build, ci, release.",
+      "text": "Allowed scopes: api, service, core, config, db, auth, ui, test, docs, lint, deps, build, ci, release."
     },
     {
-      "text": "Rules: one title line always required; use imperative mood; keep short_summary concise (about 72 chars max); no trailing period; add body only when needed.",
-    },
+      "text": "Rules: one title line always required; use imperative mood; keep short_summary concise (about 72 chars max); no trailing period; add body only when needed."
+    }
   ],
 
   /* -------------------------------------------------------------------------- */
@@ -364,26 +381,13 @@
   /* -------------------------------------------------------------------------- */
 
   "files.associations": {
-    "*.yml": "yaml",
+    "*.yml": "yaml"
   },
   "[latex]": {
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "on"
   },
   "[markdown][latex]": {
     "editor.rulers": [],
-    "editor.tabSize": 4,
-  },
-
-  "markdownlint.config": {
-    "default": true,
-    "MD007": { "indent": 4 },
-    "MD010": { "spaces_per_tab": 4 },
-    "MD013": false,
-    "MD033": { "allowed_elements": ["br"] },
-    "MD041": false,
-  },
-
-  /* -------------------------------------------------------------------------- */
-
-  "gitblame.inlineMessageEnabled": true,
+    "editor.tabSize": 4
+  }
 }

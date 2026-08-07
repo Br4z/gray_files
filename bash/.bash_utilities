@@ -5,7 +5,8 @@
 #  \ \_____\  \ \_\ \ \_\\ \_____\\ \_\  \ \_\ \ \_\\ \_____\\/\_____\
 #   \/_____/   \/_/  \/_/ \/_____/ \/_/   \/_/  \/_/ \/_____/ \/_____/
 
-source "$HOME/.local/scripts/colors_and_helpers"
+source "$HOME/.local/scripts/colors_and_helpers" # The gray_manager script make sure this
+                                                 # file is there
 
 # ---------------------------------------------------------------------------- #
 #                                    ALIASES                                   #
@@ -29,6 +30,24 @@ if command_exists lsd; then
   alias ls='lsd --group-dirs=first'
 fi
 
+# ----------------------------- MARKDOWNLINT-CLI2 ---------------------------- #
+
+if command_exists markdownlint-cli2; then
+  alias markdownlint='markdownlint-cli2 --config ~/.config/markdownlint.json'
+fi
+
+# --------------------------------- PRETTIER --------------------------------- #
+
+if command_exists prettier; then
+  alias prettier='prettier --config ~/.config/prettierrc.json'
+fi
+
+# ---------------------------------- ESLINT ---------------------------------- #
+
+if command_exists eslint; then
+  alias eslint='eslint --config ~/.config/eslint.js'
+fi
+
 # ----------------------------------- OTHER ---------------------------------- #
 
 alias cp='cp -i' # Confirm before overwriting something
@@ -45,6 +64,18 @@ alias nvimcf='cd ~/.config/nvim'
 function mkcd {
   mkdir "$1"
   cd "$1" || exit 1
+}
+
+function add_to_path {
+  if [[ -d $1 || -f $1 ]]; then
+    export PATH="$1:$PATH"
+  fi
+}
+
+function source_file {
+  if [[ -f $1 ]]; then
+    source $1
+  fi
 }
 
 # ex - archive extractor

@@ -1,3 +1,13 @@
+/*
+  Motion keys follow the permutation defined in settings.json:
+
+      n e i o -> h j k l  (left / down / up / right)
+      h j k l -> o e n i  (open line / end of word / search / insert)
+
+  The same eight letters are reused in the file explorer and for the
+  ctrl+alt / ctrl+shift / alt directional families below
+*/
+
 [
   /* -------------------------------------------------------------------------- */
   /*                                  ADDITIONS                                 */
@@ -14,6 +24,8 @@
 
   /* ------------------------------- SUGGESTIONS ------------------------------ */
 
+  // Tab cycles instead of accepting. Enter still accepts, via the default
+  // acceptSelectedSuggestion binding (see editor.acceptSuggestionOnEnter)
   {
     "key": "tab",
     "command": "selectNextSuggestion",
@@ -38,14 +50,24 @@
     "when": "listFocus && !inputFocus"
   },
   {
+    "key": "n",
+    "command": "list.collapse",
+    "when": "listFocus && !inputFocus"
+  },
+  {
+    "key": "o",
+    "command": "list.expand",
+    "when": "listFocus && !inputFocus"
+  },
+  {
     "key": "v",
     "command": "explorer.openToSide",
-    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot && !explorerResourceReadonly"
   },
   {
     "key": "h",
     "command": "runCommands",
-    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot && !explorerResourceReadonly",
     "args": {
       "commands": [
         "workbench.action.splitEditorDown",
@@ -57,32 +79,38 @@
   {
     "key": "x",
     "command": "filesExplorer.cut",
-    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot && !explorerResourceReadonly"
   },
   {
+    // No readonly guard: copying a readonly file is legitimate
     "key": "c",
     "command": "filesExplorer.copy",
-    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot"
   },
   {
     "key": "d",
     "command": "deleteFile",
-    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot && !explorerResourceReadonly"
   },
   {
     "key": "p",
     "command": "filesExplorer.paste",
-    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot && !explorerResourceReadonly"
   },
   {
     "key": "r",
     "command": "renameFile",
-    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot && !explorerResourceReadonly"
   },
   {
     "key": "a",
     "command": "explorer.newFile",
-    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot && !explorerResourceReadonly"
+  },
+  {
+    "key": "shift+a",
+    "command": "explorer.newFolder",
+    "when": "filesExplorerFocus && !inputFocus && !explorerResourceIsRoot && !explorerResourceReadonly"
   },
 
   /* ---------------------- GROUPS AND EDITORS MANAGEMENT --------------------- */
@@ -97,6 +125,9 @@
     "command": "workbench.action.previousEditorInGroup",
     "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
   },
+
+  /* ------------------------------- MOVE GROUP ------------------------------- */
+
   {
     "key": "ctrl+shift+i",
     "command": "workbench.action.moveActiveEditorGroupUp"
@@ -113,25 +144,24 @@
     "key": "ctrl+shift+n",
     "command": "workbench.action.moveActiveEditorGroupLeft"
   },
+
+  /* ------------------------------ RESIZE GROUP ------------------------------ */
+
   {
     "key": "alt+i",
-    "command": "workbench.action.decreaseViewHeight",
-    "when": "editorFocus"
+    "command": "workbench.action.decreaseViewHeight"
   },
   {
     "key": "alt+o",
-    "command": "workbench.action.increaseViewWidth",
-    "when": "editorFocus"
+    "command": "workbench.action.increaseViewWidth"
   },
   {
     "key": "alt+e",
-    "command": "workbench.action.increaseViewHeight",
-    "when": "editorFocus"
+    "command": "workbench.action.increaseViewHeight"
   },
   {
     "key": "alt+n",
-    "command": "workbench.action.decreaseViewWidth",
-    "when": "editorFocus"
+    "command": "workbench.action.decreaseViewWidth"
   },
 
   /* ------------------------------- NAVIGATION ------------------------------- */
@@ -155,6 +185,8 @@
 
   /* -------------------------------- TERMINAL -------------------------------- */
 
+  // The ctrl+t chord shadows the default ctrl+t (Go to Symbol in Workspace)
+  // That command is still reachable via <leader>cas
   {
     "key": "ctrl+t f",
     "command": "workbench.action.terminal.focusFind",
@@ -185,14 +217,21 @@
   /*                                  DELETIONS                                 */
   /* -------------------------------------------------------------------------- */
 
+  // NOTE: there is deliberately no save binding. files.autoSave is set to
+  // "onFocusChange", and formatOnSave DOES run for that trigger (unlike
+  // "afterDelay"), so formatting still happens. :w also works
+
   {
     "key": "ctrl+s",
     "command": "-workbench.action.files.save"
   },
   {
     "key": "ctrl+o",
-    "command": "-workbench.action.files.openFile",
-    "when": "true"
+    "command": "-workbench.action.files.openFile"
+  },
+  {
+    "key": "ctrl+o",
+    "command": "-workbench.action.files.openFileFolder"
   },
   {
     "key": "ctrl+n",
@@ -203,16 +242,12 @@
     "command": "-workbench.action.quickOpen"
   },
   {
+    "key": "ctrl+p",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
     "key": "ctrl+j",
     "command": "-workbench.action.togglePanel"
-  },
-
-  /* ------------------------------ VIM OVERRIDES ----------------------------- */
-
-  {
-    "key": "ctrl+c",
-    "command": "-extension.vim_ctrl+c",
-    "when": "editorTextFocus && vim.active && vim.overrideCtrlC && vim.use<C-c> && !inDebugRepl"
   },
 
   /* -------------------------------- TERMINAL -------------------------------- */
@@ -231,9 +266,5 @@
     "key": "ctrl+v",
     "command": "-workbench.action.terminal.paste",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "-workbench.action.quickOpen"
-  },
+  }
 ]

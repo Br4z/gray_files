@@ -5,31 +5,15 @@
 #  \ \_\   \ \_\ \_\\ \_____\\ \_\   \ \_\\ \_____\\ \_____\
 #   \/_/    \/_/ /_/ \/_____/ \/_/    \/_/ \/_____/ \/_____/
 
-if [[ -f "$HOME/.bashrc" ]]; then
-  source "$HOME/.bashrc"
+if [[ -f "$HOME/.bash_utilities" ]]; then
+  source "$HOME/.bash_utilities"
 fi
 
-if [[ -f "/usr/share/blesh/ble.sh" ]]; then
-  source "/usr/share/blesh/ble.sh"
-fi
+source_file "$HOME/.bashrc"
+source_file "/usr/share/nvm/init-nvm.sh"
 
-if [[ -f "/usr/share/nvm/init-nvm.sh" ]]; then
-  source "/usr/share/nvm/init-nvm.sh"
-fi
-
-if [[ -d "$HOME/.spicetify" ]]; then
-  export PATH="$HOME/.spicetify:$PATH"
-fi
-
-if [[ -d "$HOME/.local/bin/" ]]; then
-  export PATH="$HOME/.local/bin/":"$PATH"
-fi
-
-
-if [[ -d "$HOME/.local/scripts/" ]]; then
-  export PATH="$HOME/.local/scripts/":"$PATH"
-fi
-
-if [[ -d "$HOME/.dotnet/tools" ]]; then
-  export PATH="$HOME/.dotnet/tools/:$PATH"
-fi
+add_to_path "$HOME/.spicetify/"
+add_to_path "$HOME/.local/bin/"
+add_to_path "$HOME/.local/scripts/"
+add_to_path "$HOME/go/bin/"
+add_to_path "$HOME/.dotnet/tools/"

@@ -38,6 +38,11 @@ declare -r programs=(
   "openSSH"
   "vscode"
   "vscode"
+  "zed"
+  "zed"
+  "prettier"
+  "eslint"
+  "markdownlint"
 )
 
 declare -r target_paths=(
@@ -59,6 +64,11 @@ declare -r target_paths=(
   "ssh_config"
   "vscode/keybindings.json"
   "vscode/settings.json"
+  "zed/keymap.json"
+  "zed/settings.json"
+  "prettierrc.json"
+  "eslint.config.js"
+  "markdownlint.json"
 )
 
 declare -r link_paths=(
@@ -80,6 +90,11 @@ declare -r link_paths=(
   ".ssh/config"
   ".config/Code/User/keybindings.json"
   ".config/Code/User/settings.json"
+  ".config/zed/keymap.json"
+  ".config/zed/settings.json"
+  ".config/prettierrc.json"
+  ".config/eslint.config.js"
+  ".config/markdownlint.json"
 )
 
 # Ensure metadata integrity

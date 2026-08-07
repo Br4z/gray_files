@@ -5,15 +5,7 @@
 #  \ \_____\\ \_\ \_\\/\_____\\ \_\ \_\\ \_\ \_\\ \_____\
 #   \/_____/ \/_/\/_/ \/_____/ \/_/\/_/ \/_/ /_/ \/_____/
 
-[[ $- != *i* ]] && return # Exit if the current shell is not interactive
-
-# ---------------------------------------------------------------------------- #
-#                                 SOURCE FILES                                 #
-# ---------------------------------------------------------------------------- #
-
-if [[ -f "$HOME/.bash_utilities" ]]; then
-  source "$HOME/.bash_utilities"
-fi
+[[ $- == *i* ]] && source -- /usr/share/blesh/ble.sh --attach=none
 
 # ---------------------------------------------------------------------------- #
 #                                    PROMPT                                    #
@@ -114,3 +106,6 @@ PROMPT_COMMAND="_set_kali_prompt"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+[[ ! ${BLE_VERSION-} ]] || ble-attach
+

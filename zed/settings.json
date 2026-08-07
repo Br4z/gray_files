@@ -1,0 +1,317 @@
+{
+  // Selects VS Code-compatible keybindings as the base keymap
+  "base_keymap": "VSCode",
+
+  /* -------------------------------------------------------------------------- */
+  /*                              APPEARANCE AND UI                             */
+  /* -------------------------------------------------------------------------- */
+
+  /* ----------------------------- GENERAL LAYOUT ----------------------------- */
+
+  // Configures the Project Panel, which contains the file explorer
+  "project_panel": {
+    // Places the Project Panel on the right side of the window
+    "dock": "right",
+
+    // Hides file and folder icons (was "workbench.iconTheme": null)
+    "file_icons": false,
+    "folder_icons": false
+  },
+
+  // Controls the visibility of the status bar
+  "status_bar": {
+    // Shows the status bar at the bottom of the editor
+    "experimental.show": true
+  },
+
+  // Controls the editor tab bar
+  "tab_bar": {
+    // Hides the tab strip, matching "workbench.editor.showTabs": "single".
+    // Breadcrumbs below tell you which file is active, and tab / shift-tab
+    // cycle through open editors. Set to true if you'd rather see the tabs.
+    "show": false
+
+    // Only relevant when "show" is true:
+    // "show_nav_history_buttons": false,
+    // "show_tab_bar_buttons": false
+  },
+
+  // Controls items displayed in the editor toolbar
+  "toolbar": {
+    // Show breadcrumb navigation above the editor
+    "breadcrumbs": true,
+
+    // Hides quick-action buttons from the toolbar
+    "quick_actions": false
+  },
+
+  // Controls the amount of horizontal padding in centered layout mode
+  // Used by the <leader>z binding, Zed's nearest equivalent to Zen mode
+  "centered_layout": {
+    // Sets the relative padding on the left side
+    "left_padding": 0.1,
+
+    // Sets the relative padding on the right side
+    "right_padding": 0.1
+  },
+
+  /* ---------------------------- FONT AND THEMING ---------------------------- */
+
+  // Sets the editor color theme
+  // Apprentice is not bundled with Zed. To keep it, install it from the
+  // extension registry or drop the theme JSON into ~/.config/zed/themes/,
+  // then change this value AND the key inside "theme_overrides" to match.
+  "theme": "One Dark",
+
+  // Sets the font used for code buffers
+  "buffer_font_family": "ComicShannsMono Nerd Font Mono",
+
+  // Sets the editor font size in points
+  "buffer_font_size": 18,
+
+  // Controls OpenType font features
+  "buffer_font_features": {
+    // Enables contextual alternates when supported by the font
+    "calt": true,
+
+    // Enables standard ligatures when supported by the font
+    "liga": true
+  },
+
+  // Per-theme overrides, keyed by theme name.
+  // Replaces "editor.tokenColorCustomizations" / textMateRules.
+  "theme_overrides": {
+    "One Dark": {
+      "syntax": {
+        "comment": { "font_style": "italic", "font_weight": 700 },
+        "comment.doc": { "font_style": "italic", "font_weight": 700 },
+        "keyword": { "font_style": "italic", "font_weight": 700 },
+        "type": { "font_style": "italic", "font_weight": 700 },
+        "constant": { "font_style": "italic", "font_weight": 700 }
+      }
+    }
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                              EDITOR BEHAVIOUR                              */
+  /* -------------------------------------------------------------------------- */
+
+  // Enables cursor blinking
+  // Zed has no equivalent of "expand" blinking or smooth caret animation
+  "cursor_blink": true,
+
+  // Displays type information, parameter names, and other language-server hints
+  "inlay_hints": {
+    "enabled": true
+  },
+
+  // Renames matching tags/identifiers together as you type
+  "linked_edits": true,
+
+  // Keeps relevant code structure, such as function or class headers, visible
+  // while scrolling through a file
+  "sticky_scroll": {
+    "enabled": true
+  },
+
+  // Displays whitespace characters in the editor
+  // "all" shows spaces, tabs, and other whitespace characters
+  "show_whitespaces": "all",
+
+  // Controls the minimap displayed beside the editor
+  "minimap": {
+    "show": "never"
+  },
+
+  // Strips the gutter down to line numbers only
+  // (was "editor.glyphMargin": false)
+  "gutter": {
+    "line_numbers": true,
+    "folds": false,
+    "runnables": false,
+    "breakpoints": false,
+    "bookmarks": false
+  },
+
+  // Displays indentation guides
+  // NOTE: the key is "indent_guides"; a top-level "guides" block is not a real
+  // Zed setting and is silently ignored.
+  "indent_guides": {
+    "enabled": true
+  },
+
+  // Displays vertical guides at the specified character columns
+  "wrap_guides": [80, 100],
+
+  // Controls the editor scrollbar
+  "scrollbar": {
+    // Shows the scrollbar when appropriate
+    "show": "auto",
+
+    // Prevents cursor locations from being displayed on the scrollbar
+    "cursors": false
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                        FORMATTING AND FILE HANDLING                        */
+  /* -------------------------------------------------------------------------- */
+
+  // Saves files automatically when focus changes to another file or panel
+  "autosave": "on_focus_change",
+
+  // Enforces Unix-style LF line endings
+  "line_ending": "enforce_lf",
+
+  // Removes trailing whitespace whenever a file is saved
+  "remove_trailing_whitespace_on_save": true,
+
+  // Ensures that saved files end with one final newline character
+  "ensure_final_newline_on_save": true,
+
+  // Uses spaces instead of hard tab characters for indentation
+  "hard_tabs": false,
+
+  // Sets the indentation width to two spaces
+  "tab_size": 2,
+
+  // Formats files automatically when they are saved
+  "format_on_save": "on",
+
+  // Uses Zed's bundled Prettier where the language supports it, falling back
+  // to the language server otherwise. This is the default, stated explicitly.
+  // Zed already enables Prettier for JS, TS, TSX, JSON, JSONC, CSS, SCSS,
+  // LESS, HTML, YAML, Markdown, Svelte, Astro, Vue, GraphQL and LaTeX, so no
+  // per-language formatter blocks are needed.
+  //
+  // Zed finds .prettierrc by walking up from the file being formatted; there is
+  // no equivalent of "prettier.configPath". If your config lives outside a
+  // project tree, copy it to that project's root.
+  "formatter": "auto",
+
+  // Disables automatic word wrapping in the editor
+  "soft_wrap": "none",
+
+  // Runs code actions when formatting occurs
+  "code_actions_on_format": {
+    // Organizes and sorts imports during formatting
+    "source.organizeImports": true
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                                  TERMINAL                                  */
+  /* -------------------------------------------------------------------------- */
+
+  // Configures the integrated terminal
+  "terminal": {
+    // Sets the terminal font size
+    "font_size": 18,
+
+    // Configures the shell used by the terminal
+    "shell": {
+      // Launches the Arch Linux distribution through Windows Subsystem for Linux
+      "program": "wsl.exe -d archlinux"
+    }
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                                     VIM                                    */
+  /* -------------------------------------------------------------------------- */
+
+  // Enables or disables Vim mode
+  "vim_mode": true,
+
+  // Displays relative line numbers in the editor
+  "relative_line_numbers": "enabled",
+
+  // Contains Vim-specific configuration
+  // Most of these settings have an effect only when Vim mode is enabled
+  "vim": {
+    // Starts new buffers in insert mode (was "vim.startInInsertMode": true)
+    "default_mode": "insert",
+
+    // Uses the system clipboard for Vim copy and paste operations
+    "use_system_clipboard": "always",
+
+    // Keeps the yank highlight visible for 200 milliseconds
+    // Zed has no equivalent of the highlightedyank colour settings
+    "highlight_on_yank_duration": 200,
+
+    // Defines custom Vim digraphs
+    // An empty object means no custom digraphs are configured
+    "custom_digraphs": {}
+  },
+
+  // Optional: shows a popup listing the available continuations while you are
+  // partway through a <leader> sequence. Not from your VSCode config, but it
+  // pairs well with the <leader>c / <leader>d / <leader>f chains.
+  // "which_key": {
+  //   "enabled": true,
+  //   "delay_ms": 1000
+  // },
+
+  /* -------------------------------------------------------------------------- */
+  /*                                     AI                                     */
+  /* -------------------------------------------------------------------------- */
+
+  // Disables edit predictions entirely
+  // With the provider set to "none", "show_edit_predictions" has no effect
+  "edit_predictions": {
+    "provider": "none"
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                         LANGUAGE-SPECIFIC SETTINGS                         */
+  /* -------------------------------------------------------------------------- */
+
+  // Adds or overrides filename-to-language associations
+  "file_types": {
+    // Treats files ending in .yml as YAML files
+    "YAML": ["yml"]
+  },
+
+  // Overrides settings for specific languages
+  // Formatting is handled globally by "formatter": "auto" above
+  "languages": {
+    // Settings for LaTeX files
+    "LaTeX": {
+      // Wraps long lines at the editor's available width
+      "soft_wrap": "editor_width",
+
+      // Uses four spaces for indentation
+      "tab_size": 4,
+
+      // Disables the ruler guides
+      "wrap_guides": []
+    },
+
+    // Settings for Markdown files
+    "Markdown": {
+      // Wraps long lines at the editor's available width
+      "soft_wrap": "editor_width",
+
+      // Uses four spaces for indentation
+      "tab_size": 4,
+
+      // Disables the ruler guides
+      "wrap_guides": []
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                          NO ZED EQUIVALENT (DROPPED)                       */
+  /* -------------------------------------------------------------------------- */
+
+  // markdownlint.config .................. needs a third-party extension
+  // editor.formatOnPaste ................. not implemented
+  // editor.bracketPairColorization ....... theme-driven in Zed
+  // editor.guides.bracketPairs ........... not implemented
+  // editor.detectIndentation ............. no setting; Zed uses tab_size/hard_tabs
+  // editor.smoothScrolling ............... not implemented
+  // vim.showcmd .......................... not implemented
+  // vim.useCtrlKeys ...................... no global toggle; see keymap.json
+  // workbench.activityBar.location ....... Zed has no activity bar
+  // terminal.enablePersistentSessions .... not implemented
+  // copilot commitMessageGeneration ...... no settings key; a project-root
+  //                                        .rules file is the nearest lever,
+  //                                        but verify it reaches commit generation
+}

@@ -1,0 +1,292 @@
+[
+  /* -------------------------------------------------------------------------- */
+  /*                                   GLOBAL                                   */
+  /* -------------------------------------------------------------------------- */
+
+  {
+    "context": "Workspace",
+    "bindings": {
+      // ctrl+s -> command palette
+      "ctrl-s": "command_palette::Toggle",
+
+      "ctrl-r": "workspace::ToggleBottomDock",
+
+      /* --------------------------- PANE NAVIGATION --------------------------- */
+
+      "ctrl-alt-i": "workspace::ActivatePaneUp",
+      "ctrl-alt-o": "workspace::ActivatePaneRight",
+      "ctrl-alt-e": "workspace::ActivatePaneDown",
+      "ctrl-alt-n": "workspace::ActivatePaneLeft",
+
+      /* ------------------------------ MOVE PANE ------------------------------ */
+
+      "ctrl-shift-i": "workspace::MovePaneUp",
+      "ctrl-shift-o": "workspace::MovePaneRight",
+      "ctrl-shift-e": "workspace::MovePaneDown",
+      "ctrl-shift-n": "workspace::MovePaneLeft",
+
+      /* ----------------------------- RESIZE PANE ----------------------------- */
+
+      "alt-i": "vim::ResizePaneDown",
+      "alt-e": "vim::ResizePaneUp",
+      "alt-o": "vim::ResizePaneRight",
+      "alt-n": "vim::ResizePaneLeft",
+
+      /* ------------------------------ DELETIONS ------------------------------ */
+      // Freed at the workspace level; vim keeps its own ctrl-o / ctrl-e / ctrl-p
+      // bindings because those live in a more specific context
+      "ctrl-o": null, // workspace::Open
+      "ctrl-n": null, // workspace::NewFile
+      "ctrl-e": null, // file_finder::Toggle
+      "ctrl-p": null, // file_finder::Toggle
+      "ctrl-j": null // workspace::ToggleBottomDock (moved to ctrl-r)
+    }
+  },
+
+  // Keys you repurposed have to be re-declared inside the vim contexts too,
+  // otherwise vim wins (ctrl-r = redo, ctrl-s = signature help in insert)
+  {
+    "context": "vim_mode == normal || vim_mode == visual || vim_mode == insert || vim_mode == replace",
+    "bindings": {
+      "ctrl-s": "command_palette::Toggle",
+      "ctrl-r": "workspace::ToggleBottomDock",
+      "shift-u": "vim::Redo" // redo, since ctrl-r is taken
+    }
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                              VIM SHARED MOTION                             */
+  /* -------------------------------------------------------------------------- */
+  // VimControl = normal + visual + operator-pending, all at once
+
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      // Navigation: n e i o  ->  h j k l
+      "n": "vim::Left",
+      "e": "vim::Down",
+      "i": "vim::Up",
+      "o": "vim::Right",
+
+      // End of word: j J -> e E
+      "j": "vim::NextWordEnd",
+      "shift-j": ["vim::NextWordEnd", { "ignore_punctuation": true }],
+
+      // Search results: k K -> n N
+      "k": "vim::MoveToNextMatch",
+      "shift-k": "vim::MoveToPreviousMatch",
+
+      // Screen top/bottom: N O -> H L (completes the uppercase permutation)
+      "shift-n": "vim::WindowTop",
+      "shift-o": "vim::WindowBottom",
+
+      // l -> i as the "inner text object" prefix (visual + operator-pending)
+      // Normal mode overrides this to InsertBefore below
+      "l": ["vim::PushObject", { "around": false }]
+      // `a` is left alone: still "around" object here, InsertAfter in normal
+    }
+  },
+
+  /* ------------------------------- NORMAL MODE ------------------------------ */
+
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      // These have normal-mode-specific defaults that would otherwise win
+      "i": "vim::Up",
+      "o": "vim::Right",
+
+      // Insert
+      "l": "vim::InsertBefore",
+      "shift-l": "vim::InsertFirstNonWhitespace",
+
+      // Open line
+      "h": "vim::InsertLineBelow",
+      "shift-h": "vim::InsertLineAbove",
+
+      // Hover (I -> K)
+      "shift-i": "editor::Hover",
+
+      // Join lines (E -> J)
+      "shift-e": "vim::JoinLines",
+
+      // Restated here because normal mode has its own defaults for these keys
+      // (InsertLineAbove / JoinLines) that outrank the VimControl block
+      "shift-o": "vim::WindowBottom",
+      "shift-j": ["vim::NextWordEnd", { "ignore_punctuation": true }],
+
+      /* --------------------------- LEADER MAPPINGS --------------------------- */
+
+      "space b": "workspace::ToggleRightDock",
+
+      // Splits
+      "space s v": "pane::SplitRight",
+      "space s h": "pane::SplitDown",
+      "space s e": "vim::ResetPaneSizes",
+
+      // Coding
+      "space c c": "editor::ToggleComments",
+      "space c r": "editor::Rename",
+      "space c a s": "project_symbols::Toggle",
+      "space c s": "outline::Toggle",
+
+      // Go to
+      "space g d": "editor::GoToDefinition",
+      "space g r": "editor::FindAllReferences",
+      "space g i": "editor::GoToImplementation",
+
+      // Debug
+      "space d a": "debugger::Start",
+      "space d t": "debugger::Stop",
+      "space d o": "debugger::StepOver",
+      "space d b": "editor::ToggleBreakpoint",
+      "space d e": "editor::Hover", // Closest thing to showDebugHover
+      "space d c": "debugger::Continue",
+
+      // Pseudo Telescope
+      "space f f": "file_finder::Toggle",
+      "space f s": "pane::DeploySearch",
+      "space f b": "tab_switcher::ToggleAll",
+
+      // Increment / decrement numbers
+      "space +": "vim::Increment",
+      "space -": "vim::Decrement",
+
+      // File explorer
+      "space e": "project_panel::ToggleFocus",
+
+      // Close editor / close all in pane
+      "space w": "pane::CloseActiveItem",
+      "space shift-w": "pane::CloseAllItems",
+
+      // Zen mode (Zed's nearest equivalent) and monocle
+      "space z": "workspace::ToggleCenteredLayout",
+      "space m": "workspace::ToggleZoom"
+    }
+  },
+
+  /* ------------------------------- VISUAL MODE ------------------------------ */
+
+  {
+    "context": "Editor && vim_mode == visual && !menu",
+    "bindings": {
+      // Visual-mode-specific defaults that would otherwise win
+      "i": "vim::Up",
+      "o": "vim::Right",
+
+      // Inner text object / block insert
+      "shift-l": "vim::InsertBefore",
+
+      // Other end of selection
+      "h": "vim::OtherEndRowAware",
+      "shift-h": "vim::OtherEnd",
+
+      // Move lines
+      "shift-i": "editor::MoveLineUp",
+      "shift-e": "editor::MoveLineDown",
+
+      // Restated here because visual mode has its own defaults for these keys
+      // (OtherEnd / JoinLines) that outrank the VimControl block
+      "shift-o": "vim::WindowBottom",
+      "shift-j": ["vim::NextWordEnd", { "ignore_punctuation": true }],
+
+      // Block comment
+      "space c c": "vim::ToggleBlockComments",
+
+      // Keep the selection after indent/outdent (your `<gv` / `>gv`)
+      ">": ["workspace::SendKeystrokes", "> g v"],
+      "<": ["workspace::SendKeystrokes", "< g v"]
+    }
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                        GROUPS AND EDITORS MANAGEMENT                       */
+  /* -------------------------------------------------------------------------- */
+
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !menu",
+    "bindings": {
+      "tab": "pane::ActivateNextItem",
+      "shift-tab": "pane::ActivatePreviousItem"
+    }
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                                 SUGGESTIONS                                */
+  /* -------------------------------------------------------------------------- */
+
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "tab": "editor::ContextMenuNext",
+      "shift-tab": "editor::ContextMenuPrevious"
+      // enter still confirms the completion
+    }
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                  FILE EXPLORER OPERATIONS AND NAVIGATION                   */
+  /* -------------------------------------------------------------------------- */
+
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      // Navigation
+      "i": "vim::MenuSelectPrevious",
+      "e": "vim::MenuSelectNext",
+      "n": "project_panel::CollapseSelectedEntry", // addition, keeps n/e/i/o consistent
+      "o": "project_panel::ExpandSelectedEntry", // addition
+
+      // Open
+      "v": "project_panel::OpenSplitVertical", // was explorer.openToSide
+      "h": "project_panel::OpenSplitHorizontal", // was split-down + open + close others
+
+      // Operations
+      "x": "project_panel::Cut",
+      "c": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "d": "project_panel::Trash",
+      "r": "project_panel::Rename",
+      "a": "project_panel::NewFile"
+    }
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                                  TERMINAL                                  */
+  /* -------------------------------------------------------------------------- */
+
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-t f": "buffer_search::Deploy",
+      "ctrl-up": "terminal::ScrollPageUp",
+      "ctrl-down": "terminal::ScrollPageDown"
+
+      // ctrl-t o / ctrl-t n (scrollToNext/PreviousCommand) have no Zed
+      // equivalent yet. Nearest available:
+      // "ctrl-t o": "terminal::ScrollLineDown",
+      // "ctrl-t n": "terminal::ScrollLineUp"
+    }
+  },
+
+  /* -------------------------------------------------------------------------- */
+
+  {
+    "context": "Editor && mode == full",
+    "unbind": {
+      "ctrl-shift-o": "outline::Toggle"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-b": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-alt-b": "workspace::ToggleRightDock"
+    }
+  }
+]
